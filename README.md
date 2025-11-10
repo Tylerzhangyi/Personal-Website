@@ -52,33 +52,6 @@ personal-portfolio/
 └── README.md
 ```
 
-## 安装和运行
-
-### 安装依赖
-
-```bash
-npm install
-```
-
-### 开发模式
-
-```bash
-npm run dev
-```
-
-访问 http://localhost:5173 查看网站
-
-### 构建生产版本
-
-```bash
-npm run build
-```
-
-### 预览生产版本
-
-```bash
-npm run preview
-```
 
 ## 页面说明
 
@@ -92,7 +65,6 @@ npm run preview
 - 学术兴趣
 - 个人爱好
 - 目标和抱负
-- 照片展示
 
 ### 技能 (Skills)
 - 技能水平展示（可交互的技能条）
@@ -187,11 +159,4 @@ npm run preview
 
 MIT License
 
-## 作者
-
-你的名字
-
----
-
-**注意**：这是一个学习项目，用于展示 Vue.js 和 Vite 的使用。你可以基于此项目进行扩展和定制。
 

@@ -1,118 +1,124 @@
-# AI 助手使用记录
+1.根据这个要求，帮我写一个粗略的个人网站
+1. Project Goal
+Welcome to your Midterm PA! The goal of this assessment is for you to comprehensively apply your knowledge of Vue.js (Frontend) and Vite (Build Tool) to build a fully functional, responsive, professional, and unique personal brand website from scratch.
 
-本文档记录在开发个人作品集网站过程中使用 AI 助手的相关情况。
+This is not just a technical test; it's an opportunity to build an "online portfolio" for yourself. This website will become an important platform for you when applying to college, finding internships, or showcasing your personal projects.
 
-## 说明
+2. Context & Tech Stack
+You have mastered key skills in modern web development:
 
-根据项目要求，我使用了 AI 助手（如 ChatGPT、Claude 等）来帮助开发这个项目。本文档用于记录相关的 AI 提示词和使用情况，以便在后续的代码审查中能够解释代码的来源和修改过程。
+Vue.js: A progressive JavaScript framework for building dynamic, component-based user interfaces.
 
-## 使用场景
+Vite: An extremely fast modern front-end build tool that provides a lightning-fast development experience.
 
-### 1. 项目初始化
-- **提示词**：创建 Vue 3 + Vite 项目的基础结构，包括 package.json、vite.config.js 等配置文件
-- **AI 建议**：标准的 Vue 3 + Vite 项目结构
-- **我的修改**：
-  - 调整了项目名称和描述
-  - 添加了 Vue Router 依赖
-  - 配置了中文语言环境
+This project requires you to focus on front-end development, using Vue to build all pages and interactions, and Vite to manage your project. All dynamic data (like projects and blog posts) will be loaded from local JSON files rather than an external API.
 
-### 2. 路由配置
-- **提示词**：如何使用 Vue Router 4 配置路由，包括动态路由参数
-- **AI 建议**：使用 createRouter 和 createWebHistory
-- **我的修改**：
-  - 根据项目需求定义了所有路由路径
-  - 配置了项目、博客的详情页动态路由
-  - 设置了路由的命名和组件映射
+3. Core Requirements
+Your personal website must include the following features. You are free to design the layout and style, but the functionality must be complete.
 
-### 3. 导航栏组件
-- **提示词**：创建一个响应式的导航栏组件，支持移动端菜单切换
-- **AI 建议**：使用 Vue 3 的响应式数据和条件渲染
-- **我的修改**：
-  - 设计了符合项目风格的导航栏样式
-  - 实现了移动端的汉堡菜单功能
-  - 添加了路由激活状态的高亮显示
+Your site must include a persistent navigation bar (Navbar) to allow users to easily navigate to all main pages (e.g., Home, Projects, Blog, About Me).
 
-### 4. 数据获取
-- **提示词**：如何在 Vue 组件中异步加载本地 JSON 文件
-- **AI 建议**：使用 fetch API 在 mounted 生命周期钩子中获取数据
-- **我的修改**：
-  - 实现了错误处理机制
-  - 添加了加载状态管理
-  - 根据项目需求调整了数据结构
+A. Static Content
+These pages are primarily for displaying information and are relatively fixed.
 
-### 5. 响应式设计
-- **提示词**：CSS 响应式设计的最佳实践，使用 CSS Grid 和 Flexbox
-- **AI 建议**：使用媒体查询和弹性布局
-- **我的修改**：
-  - 设计了移动端优先的响应式布局
-  - 实现了卡片式布局的响应式网格
-  - 优化了移动端的触摸交互体验
+Homepage:
 
-### 6. 动态路由
-- **提示词**：Vue Router 中如何处理动态路由参数，在详情页中获取数据
-- **AI 建议**：使用 $route.params 获取路由参数
-- **我的修改**：
-  - 实现了项目详情页和博客详情页
-  - 添加了路由监听，确保路由变化时重新获取数据
-  - 实现了错误处理和加载状态
+A clear welcome message and a professional avatar or personal logo.
 
-## 代码理解说明
+A brief self-introduction (who you are, what you do).
 
-所有代码都经过了我的理解和修改，主要修改包括：
+Quick links to the most important parts of your site (like "Projects" or "Blog").
 
-1. **变量命名**：根据项目实际情况调整了变量和函数命名
-2. **样式设计**：完全自定义了项目的视觉风格和配色方案
-3. **数据结构**：根据项目需求设计了 JSON 数据结构
-4. **功能扩展**：添加了额外的功能，如错误处理、加载状态等
-5. **中文支持**：所有用户界面文本都使用中文
+About Me:
 
-## 关键代码片段说明
+A more detailed personal story, your academic interests, and your passions.
 
-### 异步数据加载
-```javascript
-async fetchProjects() {
-  try {
-    const response = await fetch('/data/projects.json')
-    if (!response.ok) {
-      throw new Error('无法加载项目数据')
-    }
-    const data = await response.json()
-    this.projects = data.projects || []
-    this.loading = false
-  } catch (error) {
-    this.error = error.message
-    this.loading = false
-  }
-}
-```
-**说明**：这段代码实现了从本地 JSON 文件异步加载项目数据，包含错误处理和加载状态管理。
+Your personal aspirations/goals.
 
-### 动态路由参数获取
-```javascript
-async fetchProject() {
-  const projectId = this.$route.params.id
-  // ... 获取对应项目数据
-}
-```
-**说明**：使用 Vue Router 的 $route.params 获取动态路由参数，用于加载对应的项目详情。
+Encouraged to include more photos, a detailed text introduction, and skill tags.
 
-## 学习收获
+Skills/Resume:
 
-通过使用 AI 助手，我学会了：
-1. Vue 3 的 Composition API 和 Options API 的使用
-2. Vue Router 4 的路由配置和动态路由
-3. 异步数据加载和错误处理
-4. 响应式设计的最佳实践
-5. 组件化开发的思想
+Skill Set: Clearly display the technologies you have mastered (e.g., Python, JavaScript, Vue, HTML, CSS...). (Bonus: Make it an interactive chart or skill bar).
 
-## 注意事项
+Resume: Your educational background, relevant courses, and awards/achievements.
 
-- 所有代码都经过了我的理解和测试
-- 代码风格和结构符合项目需求
-- 功能实现完整，包括错误处理和边界情况
-- 代码注释清晰，便于理解和维护
+Links:
 
----
+Links to your friends' websites, your favorite learning resources, or developers you admire. Each link should ideally include an icon and a short description.
 
-**提示**：在代码审查时，请参考本文档了解代码的来源和修改过程。如果对任何代码片段有疑问，我可以详细解释其实现原理和修改原因。
+B. Dynamic Content (JSON-Driven)
+These features require asynchronously loading data from local JSON files.
 
+Project Portfolio:
+
+Must be data-driven using JSON. You will need to create a local JSON file in your project (e.g., public/data/projects.json) and asynchronously load (fetch) it in your Vue component to render the project list.
+
+List Page: Display an overview of all your projects (in a card format).
+
+Detail Page: Each project should have a detailed description (a project card):
+
+Project name and introduction.
+
+Screenshots or videos of the project.
+
+The technology stack used.
+
+Your specific contribution (if it was a team project).
+
+Link to the GitHub repository (Required).
+
+(Optional) Link to a Live Demo.
+
+This page or a related one should also display a list of your main GitHub repositories.
+
+Blog/Journal:
+
+Must be data-driven from JSON (Read-only). You will need to create another JSON file (e.g., public/data/blog.json) to store your blog posts.
+
+(GET) Visitors can view a list of posts and the full post details. Visitors should be able to see the list and click to read the full article.
+
+C. Non-Functional Requirements
+Responsive Design: The website must display and function well on both desktop and mobile devices.
+
+Git & GitHub: All your code must be pushed to GitHub (during development) with a clear commit history.
+
+4. The "AI Assistant" Rule
+In this project, you are encouraged to use AI (like Gemini, ChatGPT, Copilot, etc.) as your "pair programmer." AI is a powerful tool, and learning to "harness" it is an essential skill for modern developers.
+
+However, your final grade depends on your "mastery" of the project, not the AI's.
+
+You Should:
+Use AI to learn new concepts (e.g., "How to asynchronously load a local JSON file in Vue?" or "How do dynamic routes work in Vue Router?").
+
+Use AI to generate boilerplate code (e.g., "Write me a template for a fetch request in Vue").
+
+Use AI to debug errors (e.g., "My Vue component isn't rendering, here is my code...").
+
+Use AI to optimize and refactor your code (e.g., "How can I make this function more concise?").
+
+You Must:
+Understand every line of code you submit. If the AI gives you code you don't understand, you must learn it or not use it.
+
+Modify and Adapt. You are strictly prohibited from copy-pasting AI-generated code verbatim into your project. You must:
+
+Change it to fit your project's variable and function names.
+
+Adapt it to your JSON data structure and component props.
+
+Apply your own CSS styles or component library to it.
+
+Take responsibility for all your design and technical choices. AI can make mistakes or provide outdated/inefficient solutions.
+
+Assessment Method: During the final presentation, I (the teacher) will randomly select any part of your code and, using your PROMPTS.md file as a reference, ask you to explain it line-by-line, why it's written that way, and how you prompted the AI and modified its answer. If you cannot explain it, that part will be considered incomplete.
+
+
+2.根据图片修改主页风格
+
+3.主界面我想要是整个图片成为背景，类似这个，同时整个网站的配色风格也使用这个
+
+4.删除peoject的详细描述板块
+
+5.帮我修改网站风格,改成高级简约
+
+6.按钮图标不要用emoji,用icon
