@@ -1,0 +1,46 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Remindu",
+      "intro": "使用Vue.js搭建一个解决食物过期问题的应用",
+      "technologies": ["Vue", "Python", "AWS DB", "CSS"],
+      "contribution": "独立完成整个项目的开发，包括前端架构设计、路由配置、样式设计、数据库设计等。",
+      "demo": "http://remindu.net/#/",
+      "image": "/remindu.png",
+      "screenshots": [
+        "/remindu1.png",
+        "/remindu2.png",
+        "/remindu3.png"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Python 植物大战僵尸",
+      "intro": "使用Python和CMU Graphic库实现了部分植物大战僵尸的内容",
+      "technologies": ["Python"],
+      "contribution": "通过Python和CMU Graphic库实现游戏中的一些植物和僵尸的机制,并且更改了游戏的胜利模式。",
+      "demo": "https://youtu.be/nq5CPFzgO1Q",
+      "github": "https://github.com/Tylerzhangyi/CMU-15-112",
+      "image": "/pvz.png",
+      "screenshots": [
+        "/pvz1.png",
+        "/pvz2.png",
+        "/pvz3.png"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "猜盐每日挑战刷新器",
+      "intro": "可以通过刷新器调用以前的题目,使猜盐每日挑战可以随机变化",
+      "technologies": ["API", "JavaScript"],
+      "contribution": "基于原本的插件代码,增加了猜农和猜粥的部分。",
+      "github": "https://github.com/Tylerzhangyi/-xiaoce.fun-NO-SEKURIPUTO",
+      "image": "/guess.png",
+      "screenshots": [
+        "/guess1.png"
+      ]
+    }
+  ]
+}
+
