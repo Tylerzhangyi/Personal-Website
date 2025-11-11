@@ -122,3 +122,15 @@ Assessment Method: During the final presentation, I (the teacher) will randomly 
 5.帮我修改网站风格,改成高级简约
 
 6.按钮图标不要用emoji,用icon
+
+7.增加路由和contact界面,点击联系我这个按钮会跳转到一个新界面,上面记载着联系方式
+
+8.在主页面增加foot划分,增加信息.同时主界面的头像大一点
+
+9.在主页的左上角的Tyler Zhang's Portfolio左边增加一个icon,同时导航栏增加联系我
+
+10. 帮我实现中英文的切换功能
+
+11. 我在用vue开发个人网站.实现Home,SKills和About中的所有内容也都要中英文切换
+
+12.帮我在readme中列出我所用到的组件

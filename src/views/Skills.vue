@@ -1,12 +1,12 @@
 <template>
   <div class="skills page">
     <div class="container">
-      <h1 class="page-title">技能与简历</h1>
+      <h1 class="page-title">{{ t('skills.title') }}</h1>
       
       <div class="skills-section">
-        <h2>技能集合</h2>
+        <h2>{{ t('skills.skillset') }}</h2>
         <div class="skills-grid">
-          <div v-for="skill in skills" :key="skill.name" class="skill-item">
+          <div v-for="skill in skillsList" :key="skill.name" class="skill-item">
             <div class="skill-header">
               <span class="skill-name">{{ skill.name }}</span>
               <span class="skill-level">{{ skill.level }}%</span>
@@ -19,32 +19,39 @@
       </div>
 
       <div class="resume-section">
-        <h2>教育背景</h2>
+        <h2>{{ t('skills.education') }}</h2>
         <div class="timeline">
-          <div v-for="edu in education" :key="edu.id" class="timeline-item">
+          <div v-for="(edu, index) in educationList" :key="index" class="timeline-item">
             <div class="timeline-content">
               <h3>{{ edu.degree }}</h3>
               <p class="institution">{{ edu.institution }}</p>
               <p class="period">{{ edu.period }}</p>
-              <p class="description">{{ edu.description }}</p>
+              <p class="description">
+                <template v-if="edu.link">
+                  <a :href="edu.link" target="_blank" rel="noopener">{{ edu.description }}</a>
+                </template>
+                <template v-else>
+                  {{ edu.description }}
+                </template>
+              </p>
             </div>
           </div>
         </div>
       </div>
 
       <div class="courses-section">
-        <h2>相关课程</h2>
+        <h2>{{ t('skills.courses') }}</h2>
         <div class="courses-grid">
-          <div v-for="course in courses" :key="course" class="course-tag">
+          <div v-for="course in coursesList" :key="course" class="course-tag">
             {{ course }}
           </div>
         </div>
       </div>
 
       <div class="awards-section">
-        <h2>奖项与成就</h2>
+        <h2>{{ t('skills.awards') }}</h2>
         <ul class="awards-list">
-          <li v-for="award in awards" :key="award">
+          <li v-for="award in awardsList" :key="award">
             <TrophyIcon class="award-icon" />
             {{ award }}
           </li>
@@ -56,45 +63,33 @@
 
 <script>
 import { TrophyIcon } from '@heroicons/vue/24/outline'
+import { i18n, t as $t, getDict } from '../utils/i18n'
 
 export default {
   name: 'Skills',
   components: {
     TrophyIcon
   },
-  data() {
-    return {
-      skills: [
-        { name: 'Vue.js', level: 85 },
-        { name: 'JavaScript', level: 80 },
-        { name: 'HTML/CSS', level: 90 },
-        { name: 'Python', level: 75 },
-        { name: 'Git', level: 70 },
-      ],
-      education: [
-        {
-          id: 1,
-          degree: '计算机科学',
-          institution: '杭州云谷学校',
-          period: '2023 - 2026',
-          description: '主修计算机科学，专注于 Web 开发方向，学习了数据结构、算法、数据库等核心课程。'
-        }
-      ],
-      courses: [
-        'CL/AP Computer Science A',
-        "CL Applied Python Programming, Information and Communication Technology",
-        "CL/AP Physics C:Electricity and Magnetism",
-        "CL/AP Physics C: Mechanics",
-        
-
-      ],
-      awards: [
-        "2024, 2025 Dean's List, Overall Academic Performance Top 3%",
-        'AMC 12 5% percentile',
-        'Honors College Schloar, Top3%',
-        "Top 25% in Cayley/Fermat Math Contests",
-        "IHOSA qualified for the National Round"
-      ]
+  computed: {
+    currentLang() {
+      return i18n.lang
+    },
+    skillsList() {
+      return getDict('skills.skillsList') || []
+    },
+    educationList() {
+      return getDict('skills.educationList') || []
+    },
+    coursesList() {
+      return getDict('skills.coursesList') || []
+    },
+    awardsList() {
+      return getDict('skills.awardsList') || []
+    }
+  },
+  methods: {
+    t(key) {
+      return $t(key)
     }
   }
 }
@@ -237,6 +232,16 @@ h2 {
   color: var(--color-muted);
   line-height: 1.7;
   font-size: 0.95rem;
+}
+
+.description a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.description a:hover {
+  text-decoration: underline;
 }
 
 .courses-grid {

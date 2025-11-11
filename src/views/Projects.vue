@@ -1,10 +1,10 @@
 <template>
   <div class="projects page">
     <div class="container">
-      <h1 class="page-title">项目作品集</h1>
+      <h1 class="page-title">{{ t('projects.title') }}</h1>
       
       <div v-if="loading" class="loading">
-        <p>加载中...</p>
+        <p>{{ t('projects.loading') }}</p>
       </div>
 
       <div v-else-if="error" class="error">
@@ -18,12 +18,11 @@
           </div>
           <div class="project-content">
             <h2>{{ project.name }}</h2>
-            <p class="project-intro">{{ project.intro }}</p>
             <div class="project-tech">
               <span v-for="tech in project.technologies" :key="tech" class="tech-tag">{{ tech }}</span>
             </div>
             <div class="project-actions">
-              <router-link :to="`/projects/${project.id}`" class="btn btn-primary">查看详情</router-link>
+              <router-link :to="`/projects/${project.id}`" class="btn btn-primary">{{ t('projects.details') }}</router-link>
               <a v-if="project.github" :href="project.github" target="_blank" class="btn btn-secondary">GitHub</a>
             </div>
           </div>
@@ -31,12 +30,12 @@
       </div>
 
       <div class="github-section">
-        <h2>GitHub 仓库</h2>
+        <h2>{{ t('projects.github') }}</h2>
         <div class="github-repos">
           <div v-for="repo in githubRepos" :key="repo.name" class="repo-card">
             <h3>{{ repo.name }}</h3>
             <p>{{ repo.description }}</p>
-            <a :href="repo.url" target="_blank" class="repo-link">访问仓库 →</a>
+            <a :href="repo.url" target="_blank" class="repo-link">{{ t('projects.visit') }}</a>
           </div>
         </div>
       </div>
@@ -45,6 +44,7 @@
 </template>
 
 <script>
+import { i18n, t as $t } from '../utils/i18n'
 export default {
   name: 'Projects',
   data() {
@@ -55,18 +55,26 @@ export default {
       error: null
     }
   },
+  computed: {
+    __lang() { return i18n.lang }
+  },
   async mounted() {
     await this.fetchProjects()
     await this.fetchGithubRepos()
   },
   methods: {
+    t(key) {
+      return $t(key)
+    },
     async fetchProjects() {
       try {
-        const response = await fetch('/data/projects.json')
-        if (!response.ok) {
-          throw new Error('无法加载项目数据')
+        // 优先按语言加载，若不存在则回退到 projects.json
+        let res = await fetch(`/data/projects.${i18n.lang}.json`)
+        if (!res.ok) {
+          res = await fetch('/data/projects.json')
         }
-        const data = await response.json()
+        if (!res.ok) throw new Error($t('projects.loadError') || '无法加载项目数据')
+        const data = await res.json()
         this.projects = data.projects || []
         this.loading = false
       } catch (error) {
@@ -75,17 +83,22 @@ export default {
       }
     },
     async fetchGithubRepos() {
-      // 可以从 projects.json 中提取，或者单独维护
       this.githubRepos = [
         {
-          name: 'personal-portfolio',
-          description: '个人作品集网站',
+          name: "Tyler's Github Link",
           url: 'https://github.com/Tylerzhangyi'
         }
       ]
     },
     handleImageError(e) {
       e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23e0e0e0" width="400" height="300"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="18" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3E暂无图片%3C/text%3E%3C/svg%3E'
+    }
+  },
+  watch: {
+    async __lang() {
+      this.loading = true
+      await this.fetchProjects()
+      await this.fetchGithubRepos()
     }
   }
 }

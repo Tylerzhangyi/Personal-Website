@@ -2,16 +2,16 @@
   <div class="blog-detail page">
     <div class="container">
       <div v-if="loading" class="loading">
-        <p>加载中...</p>
+        <p>{{ t('blogDetail.loading') }}</p>
       </div>
 
       <div v-else-if="error" class="error">
         <p>{{ error }}</p>
-        <router-link to="/blog" class="btn btn-primary">返回博客列表</router-link>
+        <router-link to="/blog" class="btn btn-primary">{{ t('blogDetail.back') }}</router-link>
       </div>
 
       <div v-else-if="post" class="blog-detail-content">
-        <router-link to="/blog" class="back-link">← 返回博客列表</router-link>
+        <router-link to="/blog" class="back-link">← {{ t('blogDetail.back') }}</router-link>
         
         <article class="blog-article">
           <header class="article-header">
@@ -38,6 +38,14 @@
 </template>
 
 <script>
+import { marked } from 'marked'
+import { i18n, t as $t } from '../utils/i18n'
+
+marked.setOptions({
+  breaks: true,
+  gfm: true
+})
+
 export default {
   name: 'BlogDetail',
   data() {
@@ -48,30 +56,37 @@ export default {
     }
   },
   computed: {
+    __lang() { return i18n.lang },
     formattedContent() {
       if (!this.post) return ''
-      // 简单处理：将换行符转换为 <br>，实际项目中可以使用 markdown 解析器
-      return this.post.content.replace(/\n/g, '<br>')
+      return marked.parse(this.post.content, { async: false })
     }
   },
   async mounted() {
     await this.fetchPost()
   },
   watch: {
-    '$route': 'fetchPost'
+    '$route': 'fetchPost',
+    async __lang() {
+      this.loading = true
+      await this.fetchPost()
+    }
   },
   methods: {
+    t(key) {
+      return $t(key)
+    },
     async fetchPost() {
       const postId = this.$route.params.id
       try {
-        const response = await fetch('/data/blog.json')
+        const response = await fetch(`/data/blog.${i18n.lang}.json`)
         if (!response.ok) {
-          throw new Error('无法加载博客数据')
+          throw new Error($t('blogDetail.loadError') || '无法加载博客数据')
         }
         const data = await response.json()
         const post = data.posts.find(p => p.id === parseInt(postId))
         if (!post) {
-          throw new Error('文章不存在')
+          throw new Error($t('blogDetail.notFound') || '文章不存在')
         }
         this.post = post
         this.loading = false
@@ -82,7 +97,8 @@ export default {
     },
     formatDate(dateString) {
       const date = new Date(dateString)
-      return date.toLocaleDateString('zh-CN', {
+      const locale = i18n.lang === 'zh' ? 'zh-CN' : 'en-US'
+      return date.toLocaleDateString(locale, {
         year: 'numeric',
         month: 'long',
         day: 'numeric'

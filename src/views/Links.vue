@@ -1,10 +1,10 @@
 <template>
   <div class="links page">
     <div class="container">
-      <h1 class="page-title">有用链接</h1>
+      <h1 class="page-title">{{ t('links.title') }}</h1>
       
       <div class="links-grid">
-        <div v-for="link in links" :key="link.id" class="link-card">
+        <div v-for="(link, index) in linksList" :key="index" class="link-card">
           <div class="link-icon">
             <component :is="getIconComponent(link.icon)" />
           </div>
@@ -14,7 +14,7 @@
             </h3>
             <p>{{ link.description }}</p>
             <a :href="link.url" target="_blank" rel="noopener noreferrer" class="link-url">
-              访问链接 →
+              {{ t('links.visit') }}
             </a>
           </div>
         </div>
@@ -33,6 +33,7 @@ import {
   PaintBrushIcon,
   LinkIcon
 } from '@heroicons/vue/24/outline'
+import { i18n, t as $t, getDict } from '../utils/i18n'
 
 export default {
   name: 'Links',
@@ -45,55 +46,42 @@ export default {
     PaintBrushIcon,
     LinkIcon
   },
-  data() {
-    return {
-      links: [
-        {
-          id: 1,
-          title: 'Vue.js 官方文档',
-          description: 'Vue.js 的官方文档，学习 Vue 的最佳资源',
-          url: 'https://cn.vuejs.org/',
-          icon: 'BoltIcon'
-        },
-        {
-          id: 2,
-          title: 'MDN Web 文档',
-          description: 'Web 开发技术的权威参考文档',
-          url: 'https://developer.mozilla.org/zh-CN/',
-          icon: 'BookOpenIcon'
-        },
-        {
-          id: 3,
-          title: 'GitHub',
-          description: '全球最大的代码托管平台',
-          url: 'https://github.com/',
-          icon: 'CodeBracketIcon'
-        },
-        {
-          id: 4,
-          title: 'Stack Overflow',
-          description: '程序员问答社区，解决编程问题的好地方',
-          url: 'https://stackoverflow.com/',
-          icon: 'QuestionMarkCircleIcon'
-        },
-        {
-          id: 5,
-          title: 'Vite 官方文档',
-          description: '下一代前端构建工具，快速且高效',
-          url: 'https://cn.vitejs.dev/',
-          icon: 'RocketLaunchIcon'
-        },
-        {
-          id: 6,
-          title: 'CSS-Tricks',
-          description: '前端开发技巧和教程的优质网站',
-          url: 'https://css-tricks.com/',
-          icon: 'PaintBrushIcon'
-        }
-      ]
+  computed: {
+    currentLang() {
+      return i18n.lang
+    },
+    linksList() {
+      const links = getDict('links.linksList') || []
+      const iconMap = ['BoltIcon', 'BookOpenIcon', 'CodeBracketIcon', 'QuestionMarkCircleIcon', 'RocketLaunchIcon', 'PaintBrushIcon']
+      const urlMap = {
+        zh: [
+          'https://cn.vuejs.org/',
+          'https://developer.mozilla.org/zh-CN/',
+          'https://github.com/',
+          'https://stackoverflow.com/',
+          'https://cn.vitejs.dev/',
+          'https://css-tricks.com/'
+        ],
+        en: [
+          'https://vuejs.org/',
+          'https://developer.mozilla.org/en-US/',
+          'https://github.com/',
+          'https://stackoverflow.com/',
+          'https://vitejs.dev/',
+          'https://css-tricks.com/'
+        ]
+      }
+      return links.map((link, index) => ({
+        ...link,
+        icon: iconMap[index] || 'LinkIcon',
+        url: urlMap[i18n.lang][index] || urlMap.en[index]
+      }))
     }
   },
   methods: {
+    t(key) {
+      return $t(key)
+    },
     getIconComponent(iconName) {
       const icons = {
         BoltIcon,

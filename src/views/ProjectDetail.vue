@@ -2,16 +2,16 @@
   <div class="project-detail page">
     <div class="container">
       <div v-if="loading" class="loading">
-        <p>加载中...</p>
+        <p>{{ t('projectDetail.loading') }}</p>
       </div>
 
       <div v-else-if="error" class="error">
         <p>{{ error }}</p>
-        <router-link to="/projects" class="btn btn-primary">返回项目列表</router-link>
+        <router-link to="/projects" class="btn btn-primary">{{ t('projectDetail.back') }}</router-link>
       </div>
 
       <div v-else-if="project" class="project-detail-content">
-        <router-link to="/projects" class="back-link">← 返回项目列表</router-link>
+        <router-link to="/projects" class="back-link">← {{ t('projectDetail.back') }}</router-link>
         
         <h1 class="project-title">{{ project.name }}</h1>
         
@@ -22,40 +22,40 @@
         </div>
 
         <div class="project-intro-section">
-          <h2>项目简介</h2>
+          <h2>{{ t('projectDetail.intro') }}</h2>
           <p>{{ project.intro }}</p>
         </div>
 
         <div class="project-tech-section">
-          <h2>技术栈</h2>
+          <h2>{{ t('projectDetail.tech') }}</h2>
           <div class="tech-list">
             <span v-for="tech in project.technologies" :key="tech" class="tech-tag-large">{{ tech }}</span>
           </div>
         </div>
 
         <div v-if="project.contribution" class="project-contribution-section">
-          <h2>我的贡献</h2>
+          <h2>{{ t('projectDetail.contribution') }}</h2>
           <p>{{ project.contribution }}</p>
         </div>
 
         <div class="project-links-section">
-          <h2>项目链接</h2>
+          <h2>{{ t('projectDetail.links') }}</h2>
           <div class="project-links">
             <a v-if="project.github" :href="project.github" target="_blank" class="project-link github">
               <CubeIcon class="icon-inline" />
-              GitHub 仓库
+              {{ t('projectDetail.github') }}
             </a>
             <a v-if="project.demo" :href="project.demo" target="_blank" class="project-link demo">
               <RocketLaunchIcon class="icon-inline" />
-              在线演示
+              {{ t('projectDetail.demo') }}
             </a>
           </div>
         </div>
 
         <div v-if="project.screenshots && project.screenshots.length > 0" class="project-screenshots-section">
-          <h2>项目截图</h2>
+          <h2>{{ t('projectDetail.screenshots') }}</h2>
           <div class="screenshots-grid">
-            <img v-for="(screenshot, index) in project.screenshots" :key="index" :src="screenshot" :alt="`截图 ${index + 1}`" />
+            <img v-for="(screenshot, index) in project.screenshots" :key="index" :src="screenshot" :alt="`${t('projectDetail.screenshot')} ${index + 1}`" />
           </div>
         </div>
       </div>
@@ -65,6 +65,7 @@
 
 <script>
 import { CubeIcon, RocketLaunchIcon } from '@heroicons/vue/24/outline'
+import { i18n, t as $t } from '../utils/i18n'
 
 export default {
   name: 'ProjectDetail',
@@ -79,24 +80,35 @@ export default {
       error: null
     }
   },
+  computed: {
+    __lang() { return i18n.lang }
+  },
   async mounted() {
     await this.fetchProject()
   },
   watch: {
-    '$route': 'fetchProject'
+    '$route': 'fetchProject',
+    async __lang() {
+      this.loading = true
+      await this.fetchProject()
+    }
   },
   methods: {
+    t(key) {
+      return $t(key)
+    },
     async fetchProject() {
       const projectId = this.$route.params.id
       try {
-        const response = await fetch('/data/projects.json')
-        if (!response.ok) {
-          throw new Error('无法加载项目数据')
+        let res = await fetch(`/data/projects.${i18n.lang}.json`)
+        if (!res.ok) {
+          res = await fetch('/data/projects.json')
         }
-        const data = await response.json()
+        if (!res.ok) throw new Error($t('projectDetail.loadError') || '无法加载项目数据')
+        const data = await res.json()
         const project = data.projects.find(p => p.id === parseInt(projectId))
         if (!project) {
-          throw new Error('项目不存在')
+          throw new Error($t('projectDetail.notFound') || '项目不存在')
         }
         this.project = project
         this.loading = false

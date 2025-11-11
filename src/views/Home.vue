@@ -5,20 +5,20 @@
         <div class="hero-content">
           <div class="hero-left">
             <div class="avatar-wrapper">
-              <img src="/avatar-placeholder.jpg" alt="头像" @error="handleImageError" />
+              <img src="/avatar-placeholder.jpg" :alt="t('home.avatarAlt')" @error="handleImageError" />
             </div>
           </div>
           <div class="hero-right">
-            <p class="eyebrow">前端开发者 · Vue.js 爱好者</p>
-            <h1 class="title">你好，我是
+            <p class="eyebrow">{{ t('home.eyebrow') }}</p>
+            <h1 class="title">{{ t('home.greeting') }}
               <span class="highlight">Zhang Yi</span>
             </h1>
             <p class="subtitle">
-              专注于使用 Vue.js 和现代前端工程化构建快速、优雅、可维护的 Web 体验。
+              {{ t('home.subtitle') }}
             </p>
             <div class="cta-group">
-              <router-link to="/projects" class="btn btn-primary">查看项目</router-link>
-              <a href="Tyler.zhang.cn@hotmail.com" class="btn btn-secondary">联系我</a>
+              <router-link to="/projects" class="btn btn-primary">{{ t('home.ctaProjects') }}</router-link>
+              <router-link to="/contact" class="btn btn-secondary">{{ t('home.ctaContact') }}</router-link>
             </div>
             <div class="socials">
               <a href="https://github.com/Tylerzhangyi" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
@@ -43,35 +43,42 @@
             <div class="icon">
               <RocketLaunchIcon />
             </div>
-            <h3>项目作品</h3>
-            <p>精选项目集合，涵盖前端开发与工程化实践。</p>
-            <span class="more">查看项目 →</span>
+            <h3>{{ t('home.features.projects') }}</h3>
+            <p>{{ t('home.features.projectsDesc') }}</p>
+            <span class="more">{{ t('home.features.view') }}</span>
           </router-link>
           <router-link to="/blog" class="feature-card">
             <div class="icon">
               <DocumentTextIcon />
             </div>
-            <h3>技术博客</h3>
-            <p>记录学习与实战笔记，分享使用心得与最佳实践。</p>
-            <span class="more">阅读文章 →</span>
+            <h3>{{ t('home.features.blog') }}</h3>
+            <p>{{ t('home.features.blogDesc') }}</p>
+            <span class="more">{{ t('home.features.read') }}</span>
           </router-link>
           <router-link to="/skills" class="feature-card">
             <div class="icon">
               <WrenchScrewdriverIcon />
             </div>
-            <h3>技能与简历</h3>
-            <p>技能图谱与教育背景，持续精进与更新。</p>
-            <span class="more">了解更多 →</span>
+            <h3>{{ t('home.features.skills') }}</h3>
+            <p>{{ t('home.features.skillsDesc') }}</p>
+            <span class="more">{{ t('home.features.more') }}</span>
           </router-link>
         </div>
       </div>
     </section>
+
+    <footer class="home-footer">
+      <div class="footer-bottom">
+        © {{ new Date().getFullYear() }} Zhang Yi. {{ t('home.footer') }}
+      </div>
+    </footer>
   </div>
   
 </template>
 
 <script>
 import { CodeBracketIcon, DocumentTextIcon, RocketLaunchIcon, WrenchScrewdriverIcon } from '@heroicons/vue/24/outline'
+import { i18n, t as $t } from '../utils/i18n'
 
 export default {
   name: 'Home',
@@ -81,12 +88,21 @@ export default {
     RocketLaunchIcon,
     WrenchScrewdriverIcon
   },
+  computed: {
+    currentLang() {
+      return i18n.lang
+    }
+  },
   methods: {
+    t(key) {
+      return $t(key)
+    },
     handleImageError(e) {
       e.target.style.display = 'none'
       const parent = e.target.parentElement
       parent.classList.add('avatar-fallback')
-      parent.innerHTML = '<span class="fallback-char">我</span>'
+      const fallbackChar = i18n.lang === 'zh' ? '我' : 'Me'
+      parent.innerHTML = `<span class="fallback-char">${fallbackChar}</span>`
     }
   }
 }
@@ -99,10 +115,11 @@ export default {
 
 .hero-section {
   position: relative;
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
+  padding-top: 80px; /* 避免与固定导航栏重叠 */
 }
 
 .hero-bg {
@@ -144,15 +161,15 @@ export default {
 }
 
 .avatar-wrapper {
-  width: 220px;
-  height: 220px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   overflow: hidden;
   margin: 0 auto;
   position: relative;
-  box-shadow: 0 20px 60px rgba(66, 185, 131, 0.25);
+  box-shadow: 0 20px 60px rgba(253, 191, 76, 0.25);
   outline: 8px solid rgba(66, 185, 131, 0.12);
-  background: #42b983;
+  background: #e88a55;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,14 +182,14 @@ export default {
 }
 
 .avatar-fallback {
-  width: 220px;
-  height: 220px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
-  background: #42b983;
+  background: #e88a55;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 20px 60px rgba(66, 185, 131, 0.25);
+  box-shadow: 0 20px 60px rgba(185, 151, 66, 0.25);
   outline: 8px solid rgba(66, 185, 131, 0.12);
 }
 
@@ -311,6 +328,53 @@ export default {
 .feature-card .more {
   color: var(--accent);
   font-weight: 600;
+}
+
+.home-footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--border);
+  padding: 3rem 0 1.5rem;
+  margin-top: 4rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-card h3 {
+  color: var(--brand);
+  margin-bottom: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.footer-card p,
+.footer-card li,
+.footer-card a {
+  color: var(--color-muted);
+  line-height: 1.8;
+  font-size: 0.95rem;
+}
+
+.footer-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.footer-card a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 0.85rem;
 }
 
 @media (max-width: 992px) {

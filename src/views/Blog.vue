@@ -1,10 +1,10 @@
 <template>
   <div class="blog page">
     <div class="container">
-      <h1 class="page-title">博客文章</h1>
+      <h1 class="page-title">{{ t('blog.title') }}</h1>
       
       <div v-if="loading" class="loading">
-        <p>加载中...</p>
+        <p>{{ t('blog.loading') }}</p>
       </div>
 
       <div v-else-if="error" class="error">
@@ -23,11 +23,11 @@
             </div>
           </div>
           <p class="blog-excerpt">{{ post.excerpt }}</p>
-          <router-link :to="`/blog/${post.id}`" class="read-more">阅读全文 →</router-link>
+          <router-link :to="`/blog/${post.id}`" class="read-more">{{ t('blog.readMore') }}</router-link>
         </article>
 
         <div v-if="posts.length === 0" class="no-posts">
-          <p>暂无博客文章</p>
+          <p>{{ t('blog.empty') }}</p>
         </div>
       </div>
     </div>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { i18n, t as $t } from '../utils/i18n'
 export default {
   name: 'Blog',
   data() {
@@ -44,15 +45,21 @@ export default {
       error: null
     }
   },
+  computed: {
+    __lang() { return i18n.lang }
+  },
   async mounted() {
     await this.fetchPosts()
   },
   methods: {
+    t(key) {
+      return $t(key)
+    },
     async fetchPosts() {
       try {
-        const response = await fetch('/data/blog.json')
+        const response = await fetch(`/data/blog.${i18n.lang}.json`)
         if (!response.ok) {
-          throw new Error('无法加载博客数据')
+          throw new Error($t('blog.loadError') || '无法加载博客数据')
         }
         const data = await response.json()
         this.posts = data.posts || []
@@ -64,11 +71,18 @@ export default {
     },
     formatDate(dateString) {
       const date = new Date(dateString)
-      return date.toLocaleDateString('zh-CN', {
+      const locale = i18n.lang === 'zh' ? 'zh-CN' : 'en-US'
+      return date.toLocaleDateString(locale, {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
       })
+    }
+  },
+  watch: {
+    async __lang() {
+      this.loading = true
+      await this.fetchPosts()
     }
   }
 }

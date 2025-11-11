@@ -1,0 +1,72 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Remindu",
+      "intro": "A Vue.js app to tackle food expiration problems",
+      "technologies": ["Vue", "Python", "AWS DB", "CSS"],
+      "contribution": "Independently designed and built the app: frontend architecture, routing, styling, and database design.",
+      "demo": "http://remindu.net/#/",
+      "image": "/remindu.png",
+      "screenshots": ["/remindu1.png", "/remindu2.png", "/remindu3.png"]
+    },
+    {
+      "id": 2,
+      "name": "Python Plants vs. Zombies",
+      "intro": "Implemented parts of Plants vs. Zombies using Python and the CMU Graphics library",
+      "technologies": ["Python"],
+      "contribution": "Implemented several plant/zombie mechanics and changed the victory condition using CMU Graphics.",
+      "demo": "https://youtu.be/nq5CPFzgO1Q",
+      "github": "https://github.com/Tylerzhangyi/CMU-15-112",
+      "image": "/pvz.png",
+      "screenshots": ["/pvz1.png", "/pvz2.png", "/pvz3.png"]
+    },
+    {
+      "id": 3,
+      "name": "Daily Guessing Challenge Refresher",
+      "intro": "Refreshes previous questions so the 'Guess Salt' daily challenge can vary randomly",
+      "technologies": ["API", "JavaScript"],
+      "contribution": "Extended the original plugin to include 'Guess Farmer' and 'Guess Porridge'.",
+      "github": "https://github.com/Tylerzhangyi/-xiaoce.fun-NO-SEKURIPUTO",
+      "image": "/guess.png",
+      "screenshots": ["/guess1.png"]
+    },
+    {
+      "id": 4,
+      "name": "F18 Super Hornet Maker",
+      "intro": "Redesigns the F-18 cockpit console by moving from breadboards to PCB for stability, integration and visual coherence via engineering iterations.",
+      "technologies": ["C++", "Arduino"],
+      "contribution": "Designed the PCB and programmed the microcontroller.",
+      "github": "https://evaluation.yungu.org/evaluation#/literacyEditor/847/100000129696/student",
+      "image": "/PCB.png",
+      "screenshots": [
+        "https://evaluation.yungu.org/api/preview_file?id=7773574",
+        "https://evaluation.yungu.org/api/preview_file?id=8886584"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Building a Distributed Service with AWS and Python",
+      "intro": "Builds an elastic computing system with AWS & Python for scalable digit recognition, balancing load dynamically to avoid backlog and waste.",
+      "technologies": ["Python", "Html", "JavaScript"],
+      "contribution": "Independently delivered frontend architecture, elasticity strategy, server setup and database design.",
+      "github": "https://github.com/Tylerzhangyi/digital-recognition",
+      "image": "https://evaluation.yungu.org/api/preview_file?id=8777744",
+      "screenshots": ["https://evaluation.yungu.org/api/preview_file?id=8888102"]
+    },
+    {
+      "id": 6,
+      "name": "Alibaba International Olympic Day - Robot Sports Meet",
+      "intro": "Built, programmed and tuned the PID parameters to keep the robot balance, enabling the robot to run on a 3.5-kilometer sports field.",
+      "technologies": ["Python", "Machine Learning", "PID"],
+      "contribution": "Built the robot and participated in PID parameter tuning and formula derivation.",
+      "demo": "https://www.olympics.com/ioc/news/alibaba-celebrates-olympic-day-with-global-activities-promoting-fitness-inclusion-and-innovation",
+      "image": "https://uip.alltuu.com/pl1DeLcMT22.jpg?Expires=1767121577&OSSAccessKeyId=LTAI5tCKgYFjLSzev9mGY4Vs&Signature=9RzdTmRRNtxlReVg7Z0q9azx3BA%3D&response-content-disposition=attachment%3Bfilename%3DBOBO4959-opq3742258499.jpg&response-content-type=image%2Fjpeg&x-oss-process=image%2Fresize%2Cw_1920%2Ch_1080%2Fquality%2Cq_90",
+      "screenshots": [
+        "/robot1.JPG",
+        "/robot2.JPG"
+      ]
+    }
+  ]
+}
+

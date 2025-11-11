@@ -3,50 +3,40 @@
     {
       "id": 1,
       "name": "Remindu",
-      "intro": "使用Vue.js搭建一个解决食物过期问题的应用",
+      "intro": "使用 Vue.js 搭建一个解决食物过期问题的应用",
       "technologies": ["Vue", "Python", "AWS DB", "CSS"],
       "contribution": "独立完成整个项目的开发，包括前端架构设计、路由配置、样式设计、数据库设计等。",
       "demo": "http://remindu.net/#/",
       "image": "/remindu.png",
-      "screenshots": [
-        "/remindu1.png",
-        "/remindu2.png",
-        "/remindu3.png"
-      ]
+      "screenshots": ["/remindu1.png", "/remindu2.png", "/remindu3.png"]
     },
     {
       "id": 2,
       "name": "Python 植物大战僵尸",
-      "intro": "使用Python和CMU Graphic库实现了部分植物大战僵尸的内容",
+      "intro": "使用 Python 和 CMU Graphics 库实现了部分植物大战僵尸的内容",
       "technologies": ["Python"],
-      "contribution": "通过Python和CMU Graphic库实现游戏中的一些植物和僵尸的机制,并且更改了游戏的胜利模式。",
+      "contribution": "通过 Python 和 CMU Graphics 库实现游戏中的一些植物和僵尸机制，并更改了游戏的胜利模式。",
       "demo": "https://youtu.be/nq5CPFzgO1Q",
       "github": "https://github.com/Tylerzhangyi/CMU-15-112",
       "image": "/pvz.png",
-      "screenshots": [
-        "/pvz1.png",
-        "/pvz2.png",
-        "/pvz3.png"
-      ]
+      "screenshots": ["/pvz1.png", "/pvz2.png", "/pvz3.png"]
     },
     {
       "id": 3,
       "name": "猜盐每日挑战刷新器",
-      "intro": "可以通过刷新器调用以前的题目,使猜盐每日挑战可以随机变化",
+      "intro": "通过刷新器调用以往题目，使“猜盐每日挑战”可随机变化",
       "technologies": ["API", "JavaScript"],
-      "contribution": "基于原本的插件代码,增加了猜农和猜粥的部分。",
+      "contribution": "在原插件基础上增加了“猜农”和“猜粥”的部分。",
       "github": "https://github.com/Tylerzhangyi/-xiaoce.fun-NO-SEKURIPUTO",
       "image": "/guess.png",
-      "screenshots": [
-        "/guess1.png"
-      ]
+      "screenshots": ["/guess1.png"]
     },
     {
       "id": 4,
       "name": "F18 Super Hornet Maker",
-      "intro": "该项目旨在重新设计F-18座舱控制台，从原型面包板过渡到PCB，通过基于工程最佳实践的迭代设计过程增强系统稳定性、集成度和视觉一致性。",
+      "intro": "将 F-18 座舱控制台从面包板原型过渡到 PCB 的再设计项目，通过工程化迭代提升系统稳定性、集成度与一致性。",
       "technologies": ["C++", "Arduino"],
-      "contribution": "设计了PCB电路板的机构,编写了芯片中的程序",
+      "contribution": "设计 PCB 电路板并编写芯片程序。",
       "github": "https://evaluation.yungu.org/evaluation#/literacyEditor/847/100000129696/student",
       "image": "/PCB.png",
       "screenshots": [
@@ -57,14 +47,12 @@
     {
       "id": 5,
       "name": "Building a Distributed Service with AWS and Python",
-      "intro": "使用AWS和Python构建一个分布式服务，实现可扩展的数字识别，动态均衡负载，避免队列积压与资源浪费。",
-      "technologies": ["Python", "Html","JavaScript"],
-      "contribution": "独立完成整个项目的开发，包括前端架构设计、弹性算法、服务器配置、数据库设计等。",
+      "intro": "使用 AWS 与 Python 构建弹性计算系统，实现可扩展的数字识别，动态均衡负载，避免队列积压与资源浪费。",
+      "technologies": ["Python", "Html", "JavaScript"],
+      "contribution": "独立完成前端架构、弹性策略、服务器配置与数据库设计等工作。",
       "github": "https://github.com/Tylerzhangyi/digital-recognition",
       "image": "https://evaluation.yungu.org/api/preview_file?id=8777744",
-      "screenshots": [
-        "https://evaluation.yungu.org/api/preview_file?id=8888102"
-      ]
+      "screenshots": ["https://evaluation.yungu.org/api/preview_file?id=8888102"]
     },
     {
       "id": 6,
@@ -72,6 +60,7 @@
       "intro": "构建、编程并调整PID参数，使机器人保持平衡，使机器人能够在3.5公里的运动场上奔跑。",
       "technologies": ["Python", "Machine Learning", "PID"],
       "contribution": "搭建了机器人,参与了一部分的PID调试以及公式推导",
+      "demo": "https://www.olympics.com/ioc/news/alibaba-celebrates-olympic-day-with-global-activities-promoting-fitness-inclusion-and-innovation",
       "image": "https://uip.alltuu.com/pl1DeLcMT22.jpg?Expires=1767121577&OSSAccessKeyId=LTAI5tCKgYFjLSzev9mGY4Vs&Signature=9RzdTmRRNtxlReVg7Z0q9azx3BA%3D&response-content-disposition=attachment%3Bfilename%3DBOBO4959-opq3742258499.jpg&response-content-type=image%2Fjpeg&x-oss-process=image%2Fresize%2Cw_1920%2Ch_1080%2Fquality%2Cq_90",
       "screenshots": [
         "/robot1.JPG",

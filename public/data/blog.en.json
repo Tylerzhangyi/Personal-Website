@@ -1,0 +1,32 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "Getting Started with Vue.js",
+      "excerpt": "An introductory guide to Vue.js for beginners.",
+      "content": "Vue.js is a progressive JavaScript framework for building user interfaces.\\n\\nThe core library focuses on the view layer only, making it easy to pick up and integrate with other libraries.\\n\\n## Why Vue.js?\\n\\n- Easy to learn: clean API and gentle learning curve\\n- Great performance: virtual DOM and reactivity system\\n- Rich ecosystem with strong community support\\n\\n## Getting Started\\n\\nYou can import Vue.js via CDN or install it via npm.\\n\\nVue.js makes frontend development simpler and more efficient.",
+      "date": "2024-01-15",
+      "category": "Frontend",
+      "tags": ["Vue.js", "JavaScript", "Frontend"]
+    },
+    {
+      "id": 2,
+      "title": "Understanding Vite",
+      "excerpt": "Explore the features and usage of Vite.",
+      "content": "Vite is a next-generation frontend build tool created by the author of Vue.js.\\n\\n## Advantages of Vite\\n\\n1. **Blazing fast dev server** using native ES modules\\n2. **Fast HMR** updates only the changed modules\\n3. **Optimized production build** powered by Rollup with code splitting\\n\\n## Experience\\n\\nUsing Vite delivers a smooth development experience and significantly improves productivity.",
+      "date": "2024-02-01",
+      "category": "Tooling",
+      "tags": ["Vite", "Build tool", "Engineering"]
+    },
+    {
+      "id": 3,
+      "title": "Responsive Design Best Practices",
+      "excerpt": "Best practices and tips for responsive web design.",
+      "content": "Responsive design is a crucial skill in modern web development.\\n\\n## Principles\\n\\n- Mobile-first\\n- Flexible layouts with CSS Grid and Flexbox\\n- Media queries for different screen sizes\\n\\n## Tips\\n\\n1. Use relative units (rem, em, %)\\n2. Optimize images and media\\n3. Test across devices and browsers",
+      "date": "2024-02-20",
+      "category": "Design",
+      "tags": ["Responsive", "CSS", "UX"]
+    }
+  ]
+}
+

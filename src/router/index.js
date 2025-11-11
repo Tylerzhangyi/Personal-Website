@@ -7,6 +7,7 @@ import ProjectDetail from '../views/ProjectDetail.vue'
 import Blog from '../views/Blog.vue'
 import BlogDetail from '../views/BlogDetail.vue'
 import Links from '../views/Links.vue'
+import Contact from '../views/Contact.vue'
 
 const routes = [
   {
@@ -48,6 +49,11 @@ const routes = [
     path: '/links',
     name: 'Links',
     component: Links
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
   }
 ]
 

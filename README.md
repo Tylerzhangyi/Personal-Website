@@ -5,12 +5,15 @@
 ## 功能特性
 
 - ✅ 响应式设计，支持移动端和桌面端
+- ✅ 完整的中英文国际化支持
 - ✅ 项目作品集展示（列表页和详情页）
-- ✅ 博客系统（文章列表和详情页）
+- ✅ 博客系统（文章列表和详情页，支持 Markdown）
 - ✅ 技能和简历展示
 - ✅ 个人介绍页面
 - ✅ 有用链接页面
+- ✅ 联系我页面
 - ✅ 数据驱动的动态内容（从 JSON 文件加载）
+- ✅ 现代化的 UI 设计（使用 Heroicons 图标库）
 
 ## 技术栈
 
@@ -20,32 +23,90 @@
 - **JavaScript (ES6+)** - 现代 JavaScript 语法
 - **CSS3** - 样式和响应式设计
 
+## 使用的组件和库
+
+### 核心依赖
+
+- **vue** (^3.4.21) - Vue.js 核心框架
+- **vue-router** (^4.3.0) - Vue.js 官方路由管理器
+- **@heroicons/vue** (^2.2.0) - Heroicons 图标库（提供 SVG 图标组件）
+- **marked** (^17.0.0) - Markdown 解析器（用于博客文章渲染）
+
+### Vue 组件
+
+#### 布局组件
+- **Navbar.vue** - 顶部导航栏组件，包含语言切换功能
+
+#### 页面组件
+- **Home.vue** - 首页组件
+- **About.vue** - 关于我页面组件
+- **Skills.vue** - 技能和简历页面组件
+- **Projects.vue** - 项目列表页面组件
+- **ProjectDetail.vue** - 项目详情页面组件
+- **Blog.vue** - 博客列表页面组件
+- **BlogDetail.vue** - 博客详情页面组件
+- **Links.vue** - 有用链接页面组件
+- **Contact.vue** - 联系我页面组件
+
+### 使用的图标（来自 @heroicons/vue）
+
+#### Outline 风格图标
+- **SparklesIcon** - 导航栏 Logo 图标
+- **CodeBracketIcon** - GitHub 链接图标（首页、链接页面）
+- **DocumentTextIcon** - 博客图标（首页）
+- **RocketLaunchIcon** - 项目图标（首页、项目详情、链接页面）
+- **WrenchScrewdriverIcon** - 技能图标（首页）
+- **TrophyIcon** - 奖项图标（技能页面）
+- **CubeIcon** - GitHub 仓库图标（项目详情）
+- **BookOpenIcon** - 文档图标（链接页面）
+- **QuestionMarkCircleIcon** - 问答图标（链接页面）
+- **PaintBrushIcon** - 设计图标（链接页面）
+- **LinkIcon** - 链接图标（链接页面）
+
+#### Solid 风格图标
+- **CheckIcon** - 复选框图标（关于页面）
+
+### 工具模块
+
+- **i18n.js** - 国际化工具模块，提供中英文切换功能
+  - `i18n` - 响应式语言状态对象
+  - `t()` - 翻译函数
+  - `getDict()` - 获取翻译字典函数
+  - `setLanguage()` - 设置语言函数
+
 ## 项目结构
 
 ```
 personal-portfolio/
 ├── public/
 │   ├── data/
-│   │   ├── projects.json    # 项目数据
-│   │   └── blog.json        # 博客数据
+│   │   ├── projects.json      # 项目数据（中文）
+│   │   ├── projects.en.json   # 项目数据（英文）
+│   │   ├── projects.zh.json   # 项目数据（中文）
+│   │   ├── blog.json          # 博客数据（中文）
+│   │   ├── blog.en.json       # 博客数据（英文）
+│   │   └── blog.zh.json       # 博客数据（中文）
 │   └── ...
 ├── src/
 │   ├── components/
-│   │   └── Navbar.vue       # 导航栏组件
+│   │   └── Navbar.vue         # 导航栏组件
 │   ├── views/
-│   │   ├── Home.vue         # 首页
-│   │   ├── About.vue        # 关于我
-│   │   ├── Skills.vue       # 技能页面
-│   │   ├── Projects.vue     # 项目列表
-│   │   ├── ProjectDetail.vue # 项目详情
-│   │   ├── Blog.vue         # 博客列表
-│   │   ├── BlogDetail.vue   # 博客详情
-│   │   └── Links.vue        # 链接页面
+│   │   ├── Home.vue           # 首页
+│   │   ├── About.vue          # 关于我
+│   │   ├── Skills.vue         # 技能页面
+│   │   ├── Projects.vue       # 项目列表
+│   │   ├── ProjectDetail.vue  # 项目详情
+│   │   ├── Blog.vue           # 博客列表
+│   │   ├── BlogDetail.vue     # 博客详情
+│   │   ├── Links.vue          # 链接页面
+│   │   └── Contact.vue        # 联系我页面
 │   ├── router/
-│   │   └── index.js         # 路由配置
-│   ├── App.vue              # 根组件
-│   ├── main.js              # 入口文件
-│   └── style.css            # 全局样式
+│   │   └── index.js           # 路由配置
+│   ├── utils/
+│   │   └── i18n.js            # 国际化工具模块
+│   ├── App.vue                # 根组件
+│   ├── main.js                # 入口文件
+│   └── style.css              # 全局样式
 ├── index.html
 ├── package.json
 ├── vite.config.js
@@ -90,14 +151,19 @@ personal-portfolio/
 - 朋友网站链接
 - 开发者社区链接
 
+### 联系我 (Contact)
+- 联系方式展示（邮箱、GitHub、手机号等）
+- 合作意向说明
+- 快速操作按钮（发邮件、查看项目）
+
 ## 数据管理
 
-项目使用本地 JSON 文件存储动态数据：
+项目使用本地 JSON 文件存储动态数据，支持中英文双语：
 
-- `public/data/projects.json` - 项目数据
-- `public/data/blog.json` - 博客文章数据
-
-你可以直接编辑这些 JSON 文件来更新内容。
+- `public/data/projects.zh.json` - 项目数据（中文）
+- `public/data/projects.en.json` - 项目数据（英文）
+- `public/data/blog.zh.json` - 博客文章数据（中文）
+- `public/data/blog.en.json` - 博客文章数据（英文）
 
 ## 自定义
 
@@ -154,6 +220,9 @@ personal-portfolio/
 - 响应式设计：使用 CSS Grid 和 Flexbox 实现响应式布局
 - 数据驱动：动态内容从 JSON 文件异步加载
 - 路由管理：使用 Vue Router 进行页面导航
+- 国际化：使用自定义 i18n 模块实现中英文切换
+- 图标系统：使用 Heroicons 提供统一的图标风格
+- Markdown 支持：博客文章支持 Markdown 格式渲染
 
 ## 许可证
 
