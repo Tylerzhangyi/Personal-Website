@@ -21,6 +21,8 @@ const dict = {
     home: {
       eyebrow: '创新者 · 学生',
       greeting: '你好，我是',
+      welcome: '欢迎来到我的世界',
+      role: '一名开发者。',
       subtitle: '一位希望通过计算机助益世界的创新者。',
       avatarAlt: '头像',
       ctaProjects: '查看项目',
@@ -186,7 +188,7 @@ const dict = {
       github: 'GitHub',
       location: '所在地',
       phone: '手机号',
-      gameAccount: '王者荣耀开黑',
+      gameAccount: '王者荣耀',
       sendMail: '发邮件给我',
       viewProjects: '查看项目',
       cooperation: '合作意向',
@@ -207,6 +209,8 @@ const dict = {
     home: {
       eyebrow: 'Innovator · Student',
       greeting: 'Hello, I am',
+      welcome: 'Welcome to my world',
+      role: 'a Developer.',
       subtitle: 'An innovator who hopes to help the world through computer science.',
       avatarAlt: 'Avatar',
       ctaProjects: 'View Projects',

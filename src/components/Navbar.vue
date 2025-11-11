@@ -81,8 +81,8 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: saturate(140%) blur(8px);
+  background: rgba(13,16,19,0.8);
+  backdrop-filter: saturate(150%) blur(8px);
   box-shadow: var(--shadow-sm);
   z-index: 1000;
 }
@@ -125,7 +125,7 @@ export default {
 }
 
 .nav-links a {
-  color: var(--color-text);
+  color: var(--brand);
   font-weight: 500;
   transition: color 0.3s;
   position: relative;
@@ -200,7 +200,7 @@ export default {
     top: 100%;
     left: 0;
     right: 0;
-    background: rgba(255,255,255,0.98);
+    background: rgba(13,16,19,0.98);
     flex-direction: column;
     padding: 1rem;
     gap: 1rem;

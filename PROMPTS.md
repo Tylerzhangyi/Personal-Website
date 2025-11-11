@@ -134,3 +134,7 @@ Assessment Method: During the final presentation, I (the teacher) will randomly 
 11. 我在用vue开发个人网站.实现Home,SKills和About中的所有内容也都要中英文切换
 
 12.帮我在readme中列出我所用到的组件
+
+13.使用back.png作为背景,再在这张图片上叠加一个透明度为0.6道黑色遮罩
+
+14.模仿这个网页的主界面结构,以及风格,重新修改我的主页和整体风格.使用tyler.png这张照片作为人物图片.
