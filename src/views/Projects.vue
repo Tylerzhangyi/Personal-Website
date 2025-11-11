@@ -14,7 +14,7 @@
       <div v-else class="projects-grid">
         <div v-for="project in projects" :key="project.id" class="project-card">
           <div class="project-image">
-            <img :src="project.image || '/placeholder.jpg'" :alt="project.name" @error="handleImageError" />
+            <img :src="resolveAssetUrl(project.image) || '/placeholder.jpg'" :alt="project.name" @error="handleImageError" />
           </div>
           <div class="project-content">
             <h2>{{ project.name }}</h2>
@@ -69,9 +69,9 @@ export default {
     async fetchProjects() {
       try {
         // 优先按语言加载，若不存在则回退到 projects.json
-        let res = await fetch(`/data/projects.${i18n.lang}.json`)
+        let res = await fetch(`${import.meta.env.BASE_URL}data/projects.${i18n.lang}.json`)
         if (!res.ok) {
-          res = await fetch('/data/projects.json')
+          res = await fetch(`${import.meta.env.BASE_URL}data/projects.json`)
         }
         if (!res.ok) throw new Error($t('projects.loadError') || '无法加载项目数据')
         const data = await res.json()
@@ -89,6 +89,12 @@ export default {
           url: 'https://github.com/Tylerzhangyi'
         }
       ]
+    },
+    resolveAssetUrl(url) {
+      if (!url) return url
+      if (/^https?:\/\//i.test(url)) return url
+      const cleaned = url.replace(/^\//, '')
+      return `${import.meta.env.BASE_URL}${cleaned}`
     },
     handleImageError(e) {
       e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23e0e0e0" width="400" height="300"/%3E%3Ctext fill="%23999" font-family="sans-serif" font-size="18" x="50%25" y="50%25" text-anchor="middle" dy=".3em"%3E暂无图片%3C/text%3E%3C/svg%3E'

@@ -17,7 +17,7 @@
         
         <div class="project-header">
           <div class="project-image-large">
-            <img :src="project.image || '/placeholder.jpg'" :alt="project.name" @error="handleImageError" />
+            <img :src="resolveAssetUrl(project.image) || '/placeholder.jpg'" :alt="project.name" @error="handleImageError" />
           </div>
         </div>
 
@@ -55,7 +55,7 @@
         <div v-if="project.screenshots && project.screenshots.length > 0" class="project-screenshots-section">
           <h2>{{ t('projectDetail.screenshots') }}</h2>
           <div class="screenshots-grid">
-            <img v-for="(screenshot, index) in project.screenshots" :key="index" :src="screenshot" :alt="`${t('projectDetail.screenshot')} ${index + 1}`" />
+            <img v-for="(screenshot, index) in project.screenshots" :key="index" :src="resolveAssetUrl(screenshot)" :alt="`${t('projectDetail.screenshot')} ${index + 1}`" />
           </div>
         </div>
       </div>
@@ -97,12 +97,18 @@ export default {
     t(key) {
       return $t(key)
     },
+    resolveAssetUrl(url) {
+      if (!url) return url
+      if (/^https?:\/\//i.test(url)) return url
+      const cleaned = url.replace(/^\//, '')
+      return `${import.meta.env.BASE_URL}${cleaned}`
+    },
     async fetchProject() {
       const projectId = this.$route.params.id
       try {
-        let res = await fetch(`/data/projects.${i18n.lang}.json`)
+        let res = await fetch(`${import.meta.env.BASE_URL}data/projects.${i18n.lang}.json`)
         if (!res.ok) {
-          res = await fetch('/data/projects.json')
+          res = await fetch(`${import.meta.env.BASE_URL}data/projects.json`)
         }
         if (!res.ok) throw new Error($t('projectDetail.loadError') || '无法加载项目数据')
         const data = await res.json()

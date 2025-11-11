@@ -57,7 +57,7 @@ export default {
     },
     async fetchPosts() {
       try {
-        const response = await fetch(`/data/blog.${i18n.lang}.json`)
+        const response = await fetch(`${import.meta.env.BASE_URL}data/blog.${i18n.lang}.json`)
         if (!response.ok) {
           throw new Error($t('blog.loadError') || '无法加载博客数据')
         }
