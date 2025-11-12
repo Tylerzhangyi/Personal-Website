@@ -56,7 +56,7 @@ export default {
       const urlMap = {
         zh: [
           'https://cn.vuejs.org/',
-          'https://developer.mozilla.org/zh-CN/',
+          'https://eric.mojalab.cn/',
           'https://github.com/',
           'https://stackoverflow.com/',
           'https://cn.vitejs.dev/',
@@ -64,7 +64,7 @@ export default {
         ],
         en: [
           'https://vuejs.org/',
-          'https://developer.mozilla.org/en-US/',
+          'https://eric.mojalab.cn/',
           'https://github.com/',
           'https://stackoverflow.com/',
           'https://vitejs.dev/',

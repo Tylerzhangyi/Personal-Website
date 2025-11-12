@@ -1,6 +1,7 @@
 <template>
   <div class="home page no-padding">
     <section class="hero-section">
+      <MatrixRain />
       <div class="container">
         <div class="hero-content">
           <div class="hero-copy">
@@ -61,12 +62,6 @@
         </div>
       </div>
     </section>
-
-    <footer class="home-footer">
-      <div class="footer-bottom">
-        © {{ new Date().getFullYear() }} Zhang Yi. {{ t('home.footer') }}
-      </div>
-    </footer>
   </div>
   
 </template>
@@ -74,6 +69,7 @@
 <script>
 import { CodeBracketIcon, DocumentTextIcon, RocketLaunchIcon, WrenchScrewdriverIcon } from '@heroicons/vue/24/outline'
 import { i18n, t as $t } from '../utils/i18n'
+import MatrixRain from '../components/MatrixRain.vue'
 
 export default {
   name: 'Home',
@@ -81,7 +77,8 @@ export default {
     CodeBracketIcon,
     DocumentTextIcon,
     RocketLaunchIcon,
-    WrenchScrewdriverIcon
+    WrenchScrewdriverIcon,
+    MatrixRain
   },
   computed: {
     currentLang() {
@@ -115,17 +112,15 @@ export default {
   align-items: center;
   overflow: hidden;
   padding-top: 80px; /* 避免与固定导航栏重叠 */
-  background-image: url('/back.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: #0a1528; /* 深蓝色背景，与数字雨渐变匹配 */
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 0;
+  background: rgba(0,0,0,0.2); /* 减少遮罩透明度，让数字雨更明显 */
+  z-index: 1;
+  pointer-events: none;
 }
 
 .hero-content {
@@ -135,7 +130,7 @@ export default {
   gap: 3rem;
   padding: 4rem 0 3rem;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .welcome {
@@ -295,52 +290,6 @@ export default {
   font-weight: 600;
 }
 
-.home-footer {
-  background: var(--color-surface);
-  border-top: 1px solid var(--border);
-  padding: 3rem 0 1.5rem;
-  margin-top: 4rem;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.footer-card h3 {
-  color: var(--brand);
-  margin-bottom: 0.8rem;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.footer-card p,
-.footer-card li,
-.footer-card a {
-  color: var(--color-muted);
-  line-height: 1.8;
-  font-size: 0.95rem;
-}
-
-.footer-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.footer-card a:hover {
-  color: var(--accent);
-}
-
-.footer-bottom {
-  text-align: center;
-  color: var(--color-muted);
-  font-size: 0.85rem;
-}
 
 @media (max-width: 992px) {
   .hero-content {

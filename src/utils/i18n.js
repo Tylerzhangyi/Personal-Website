@@ -18,6 +18,11 @@ const dict = {
       contact: '联系我',
       siteTitle: "Tyler Zhang's Portfolio"
     },
+    footer: {
+      navigation: '便捷导航',
+      privacyPolicy: '隐私政策',
+      termsOfUse: '使用条款'
+    },
     home: {
       eyebrow: '创新者 · 学生',
       greeting: '你好，我是',
@@ -46,16 +51,16 @@ const dict = {
       introText: '我是一名热衷于新技术的学生，致力于改善人们的生活质量。我能够通过将计算机技术与以人为本的设计相结合，识别并解决日常挑战。',
       interests: '学术兴趣',
       interestsList: [
-        '前端框架与库(Vue.js, JS)',
+        '人机交互',
         'Java, Python',
-        '用户体验设计',
+        '机器学习',
         'Web前端开发',
         '数据库管理(AWS, MySQL)'
       ],
       hobbies: '个人爱好',
-      hobbiesText: '素描,油画,电子游戏',
+      hobbiesText: '素描,油画,电子游戏,棒球',
       goals: '目标与抱负',
-      goalsText: '我的目标是成为一名全栈开发者，能够独立完成从设计到部署的整个项目流程。我希望能够参与到有意义的项目中，为构建更好的 Web 体验贡献自己的力量。同时，我也希望能够继续学习，跟上技术发展的步伐，不断提升自己的技能水平。'
+      goalsText: '我的目标是成为一名应用开发者，能够独立完成从设计到部署的整个项目流程。我希望能够参与到有意义的项目中，通过自己的计算机知识帮助到更多的人。'
     },
     skills: {
       title: '技能与简历',
@@ -160,8 +165,8 @@ const dict = {
           description: 'Vue.js 的官方文档，学习 Vue 的最佳资源'
         },
         {
-          title: 'MDN Web 文档',
-          description: 'Web 开发技术的权威参考文档'
+          title: '木酱的个人网站',
+          description: '木酱老师的个人网站,啥都有'
         },
         {
           title: 'GitHub',
@@ -206,6 +211,11 @@ const dict = {
       contact: 'Contact',
       siteTitle: "Tyler Zhang's Portfolio"
     },
+    footer: {
+      navigation: 'Quick Navigation',
+      privacyPolicy: 'Privacy Policy',
+      termsOfUse: 'Terms of Use'
+    },
     home: {
       eyebrow: 'Innovator · Student',
       greeting: 'Hello, I am',
@@ -234,16 +244,16 @@ const dict = {
       introText: 'I am a student passionate about new technology, dedicated to improving people\'s quality of life. I am able to identify and address everyday challenges by integrating computer technology with human-centered design.',
       interests: 'Academic Interests',
       interestsList: [
-        'Front-end frameworks and libraries (Vue.js, JS)',
+        'Human-Computer Interaction',
         'Java, Python',
-        'User Experience Design',
+        'Machine Learning',
         'Web Front-end Development',
         'Database Management (AWS, MySQL)'
       ],
       hobbies: 'Hobbies',
-      hobbiesText: 'Sketching, Oil painting, Video games',
+      hobbiesText: 'Sketching, Oil painting, Video games, Baseball,',
       goals: 'Goals & Aspirations',
-      goalsText: 'My goal is to become a full-stack developer capable of independently completing the entire project process from design to deployment. I hope to participate in meaningful projects and contribute to building better web experiences. At the same time, I also hope to continue learning, keep up with technological developments, and continuously improve my skill level.'
+      goalsText: 'My goal is to become an application developer, capable of independently completing the entire project process from design to deployment. I hope to be involved in meaningful projects and help more people with my computer knowledge.'
     },
     skills: {
       title: 'Skills & Resume',
@@ -348,8 +358,8 @@ const dict = {
           description: 'Official Vue.js documentation, the best resource for learning Vue'
         },
         {
-          title: 'MDN Web Docs',
-          description: 'Authoritative reference documentation for web development technologies'
+          title: "Eric Dai's Personal Website",
+          description: "Teacher Mu Jiang's personal website. It has everything"
         },
         {
           title: 'GitHub',

@@ -41,9 +41,12 @@
 import { marked } from 'marked'
 import { i18n, t as $t } from '../utils/i18n'
 
+// 配置 marked 选项
 marked.setOptions({
   breaks: true,
-  gfm: true
+  gfm: true,
+  headerIds: true,
+  mangle: false
 })
 
 export default {
@@ -58,8 +61,28 @@ export default {
   computed: {
     __lang() { return i18n.lang },
     formattedContent() {
-      if (!this.post) return ''
-      return marked.parse(this.post.content, { async: false })
+      if (!this.post || !this.post.content) return ''
+      try {
+        // 将 JSON 中的 \n 字符串转换为真正的换行符
+        // JSON 解析后，\\n 会变成字符串 \n（两个字符），需要转换为真正的换行符
+        let content = this.post.content.replace(/\\n/g, '\n')
+        // marked v4+ 使用同步 parse 方法
+        let html = marked.parse(content)
+        // 处理图片路径，添加 BASE_URL
+        const baseUrl = import.meta.env.BASE_URL
+        html = html.replace(/<img([^>]*?)src="(\/[^"]+)"([^>]*?)>/g, (match, before, src, after) => {
+          // 如果路径以 / 开头且不是外部链接，添加 BASE_URL
+          if (src.startsWith('/') && !src.startsWith('//')) {
+            const cleanSrc = src.replace(/^\//, '')
+            return `<img${before}src="${baseUrl}${cleanSrc}"${after}>`
+          }
+          return match
+        })
+        return html
+      } catch (error) {
+        console.error('Markdown parsing error:', error)
+        return this.post.content.replace(/\\n/g, '\n')
+      }
     }
   },
   async mounted() {
@@ -175,12 +198,24 @@ export default {
   margin-bottom: 1.5rem;
 }
 
+.article-content :deep(h1) {
+  color: var(--brand);
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.5rem;
+}
+
 .article-content :deep(h2) {
   color: var(--brand);
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-size: 1.8rem;
   font-weight: 600;
+  line-height: 1.4;
 }
 
 .article-content :deep(h3) {
@@ -189,24 +224,127 @@ export default {
   margin-bottom: 0.8rem;
   font-size: 1.4rem;
   font-weight: 600;
+  line-height: 1.4;
+}
+
+.article-content :deep(h4) {
+  color: var(--accent);
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.article-content :deep(strong) {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.article-content :deep(em) {
+  font-style: italic;
+}
+
+.article-content :deep(a) {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.article-content :deep(a:hover) {
+  border-bottom-color: var(--accent);
 }
 
 .article-content :deep(ul),
 .article-content :deep(ol) {
   margin-left: 2rem;
   margin-bottom: 1.5rem;
+  padding-left: 1rem;
 }
 
 .article-content :deep(li) {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.7;
+}
+
+.article-content :deep(ul li) {
+  list-style-type: disc;
+}
+
+.article-content :deep(ol li) {
+  list-style-type: decimal;
+}
+
+.article-content :deep(blockquote) {
+  border-left: 4px solid var(--accent);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--color-muted);
+  font-style: italic;
+  background: rgba(0,0,0,0.02);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
 }
 
 .article-content :deep(code) {
-  background: rgba(0,0,0,0.04);
+  background: rgba(0,0,0,0.06);
   padding: 0.2rem 0.4rem;
   border-radius: 3px;
-  font-family: 'Courier New', monospace;
+  font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
   font-size: 0.9em;
+  border: 1px solid var(--border);
+  color: var(--color-text);
+}
+
+.article-content :deep(pre) {
+  background: rgba(0,0,0,0.04);
+  padding: 1.2rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+}
+
+.article-content :deep(pre code) {
+  background: transparent;
+  padding: 0;
+  border: none;
+  font-size: 0.9em;
+  line-height: 1.6;
+}
+
+.article-content :deep(hr) {
+  border: none;
+  border-top: 2px solid var(--border);
+  margin: 2rem 0;
+}
+
+.article-content :deep(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.article-content :deep(th),
+.article-content :deep(td) {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.article-content :deep(th) {
+  background: rgba(0,0,0,0.04);
+  font-weight: 600;
+  color: var(--brand);
+}
+
+.article-content :deep(img) {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border);
 }
 

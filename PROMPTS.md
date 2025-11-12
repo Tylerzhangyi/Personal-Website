@@ -138,3 +138,12 @@ Assessment Method: During the final presentation, I (the teacher) will randomly 
 13.使用back.png作为背景,再在这张图片上叠加一个透明度为0.6道黑色遮罩
 
 14.模仿这个网页的主界面结构,以及风格,重新修改我的主页和整体风格.使用tyler.png这张照片作为人物图片.
+
+15.我已经上传了这个文件在了https://github.com/Tylerzhangyi/Personal-Website  . 我应该如何在github部署这个网站?
+
+16.帮我让这个SHM 项目 PCB 迭代报告 blog的文章在json文件中好看一点,不要以挤在一行.同时在Initial Ver. PCB下面一行插入图片SHM1;First Iteration  的Test result上方一行插入SHM2;Second Iteration的he revised design eliminates the previous short-circuit issue and allows each button to generate a clear on/off signal when pressed, enabling reliable detection by the system. (As shown in the figure below)的下面一行 SHM3;improves spatial organization, and enhances overall assembly efficiency. (As shown in the figure below)的SHM4.尾缀的都是png
+
+17.帮我在每个界面的footer中都增加便捷导航栏和© 2025 Zhang Yi. All rights reserved.
+
+18.copyright居中吗,删除链接
+
