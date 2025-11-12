@@ -123,9 +123,9 @@ export default {
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  grid-template-columns: 1.3fr 1fr;
   align-items: center;
-  gap: 3rem;
+  gap: 4rem;
   padding: 4rem 0 3rem;
   position: relative;
   z-index: 2;
@@ -209,8 +209,8 @@ export default {
 
 .hero-photo {
   justify-self: end;
-  width: 400px;
-  height: 600px;
+  width: 380px;
+  height: 550px;
   border-radius: 20px;
   overflow: visible;
   background: transparent;
@@ -220,8 +220,8 @@ export default {
   justify-content: center;
 }
 .hero-photo img {
-  width: 150%;
-  height: 150%;
+  width: 140%;
+  height: 140%;
   object-fit: contain;
 }
 
