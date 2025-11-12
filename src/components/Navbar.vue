@@ -97,6 +97,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 0;
+  gap: 1rem;
 }
 
 .logo {
@@ -122,6 +123,7 @@ export default {
   gap: 2rem;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .nav-links a {
@@ -163,7 +165,6 @@ export default {
 }
 
 .lang-toggle {
-  margin-left: 0.5rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -176,6 +177,7 @@ export default {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  align-self: center;
 }
 
 .lang-toggle:hover {
@@ -220,7 +222,7 @@ export default {
   .lang-toggle {
     margin-left: 0;
     margin-top: 1rem;
-    align-self: flex-start;
+    align-self: center;
   }
 }
 </style>

@@ -7,19 +7,17 @@
           <div class="hero-copy">
             <p class="welcome">{{ t('home.welcome') }}</p>
             <h1 class="headline">
-              {{ t('home.greeting') }} <span class="accent">Zhang&nbsp;Yi</span>
+              <span class="greeting-line">{{ t('home.greeting') }}</span>
+              <span class="accent">Zhang&nbsp;Yi</span>
+              <span class="role-line">{{ t('home.role') }}</span>
             </h1>
-            <h2 class="role">{{ t('home.role') }}</h2>
             <p class="subtitle">{{ t('home.subtitle') }}</p>
             <div class="cta-group">
               <router-link to="/projects" class="btn btn-primary">{{ t('home.ctaProjects') }}</router-link>
-              <router-link to="/contact" class="btn btn-secondary">{{ t('home.ctaContact') }}</router-link>
-            </div>
-            <div class="socials">
-              <a href="https://github.com/Tylerzhangyi" target="_blank" rel="noopener" aria-label="GitHub" class="social-link">
+              <a href="https://github.com/Tylerzhangyi" target="_blank" rel="noopener" aria-label="GitHub" class="btn btn-secondary social-link">
                 <CodeBracketIcon class="icon-inline" /> GitHub
               </a>
-              <router-link to="/blog" class="social-link">
+              <router-link to="/blog" class="btn btn-secondary social-link">
                 <DocumentTextIcon class="icon-inline" /> Blog
               </router-link>
             </div>
@@ -146,16 +144,27 @@ export default {
   line-height: 1.1;
   color: var(--brand);
   margin-bottom: 0.6rem;
+  display: flex;
+  flex-direction: column;
 }
 
-.accent { color: var(--accent); }
+.greeting-line {
+  color: var(--brand);
+  display: block;
+}
 
-.role {
+.accent { 
+  color: var(--accent);
+  display: block;
+}
+
+.role-line {
   color: var(--brand);
   font-size: 2.2rem;
   font-weight: 800;
   letter-spacing: 0.01em;
-  margin-bottom: 1.2rem;
+  display: block;
+  margin-top: 0.3rem;
 }
 
 .subtitle {
@@ -171,6 +180,7 @@ export default {
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 1rem;
+  align-items: center;
 }
 
 .btn {
@@ -187,20 +197,10 @@ export default {
 .btn-secondary { background: rgba(38,58,82,0.12); color: #ffffff; backdrop-filter: blur(2px); border: 1px solid rgba(255,255,255,0.2); }
 .btn-secondary:hover { background: rgba(38,58,82,0.22); transform: translateY(-2px); }
 
-.socials {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
-}
-
 .social-link {
-  color: var(--brand);
-  background: rgba(255,255,255,0.06);
-  border-radius: 999px;
-  padding: 0.4rem 0.9rem;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .social-link:hover {
@@ -209,20 +209,20 @@ export default {
 
 .hero-photo {
   justify-self: end;
-  width: 420px;
-  height: 520px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: #0d0f13;
+  width: 400px;
+  height: 600px;
+  border-radius: 20px;
+  overflow: visible;
+  background: transparent;
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .hero-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 150%;
+  height: 150%;
+  object-fit: contain;
 }
 
 .features {
@@ -263,12 +263,6 @@ export default {
   height: 100%;
 }
 
-.social-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 .icon-inline {
   width: 1.2rem;
   height: 1.2rem;
@@ -298,7 +292,8 @@ export default {
   }
   .hero-photo { justify-self: center; width: 80%; height: auto; max-width: 420px; }
   .headline { font-size: 3rem; }
-  .role { font-size: 1.6rem; }
+  .role-line { font-size: 1.6rem; }
+  .cta-group { justify-content: center; }
 }
 
 @media (max-width: 768px) {
