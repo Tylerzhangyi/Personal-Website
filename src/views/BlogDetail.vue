@@ -17,7 +17,10 @@
           <header class="article-header">
             <h1 class="article-title">{{ post.title }}</h1>
             <div class="article-meta">
-              <span class="article-date">📅 {{ formatDate(post.date) }}</span>
+              <span class="article-date">
+                <CalendarIcon class="article-date-icon" />
+                {{ formatDate(post.date) }}
+              </span>
               <span class="article-category">{{ post.category }}</span>
             </div>
           </header>
@@ -38,6 +41,7 @@
 </template>
 
 <script>
+import { CalendarIcon } from '@heroicons/vue/24/outline'
 import { marked } from 'marked'
 import { i18n, t as $t } from '../utils/i18n'
 
@@ -51,6 +55,9 @@ marked.setOptions({
 
 export default {
   name: 'BlogDetail',
+  components: {
+    CalendarIcon
+  },
   data() {
     return {
       post: null,
@@ -177,6 +184,20 @@ export default {
   gap: 1rem;
   font-size: 0.9rem;
   color: var(--color-muted);
+  align-items: center;
+}
+
+.article-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.article-date-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-muted);
+  flex-shrink: 0;
 }
 
 .article-category {

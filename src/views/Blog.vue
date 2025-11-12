@@ -18,7 +18,10 @@
               <router-link :to="`/blog/${post.id}`">{{ post.title }}</router-link>
             </h2>
             <div class="blog-meta">
-              <span class="blog-date">📅 {{ formatDate(post.date) }}</span>
+              <span class="blog-date">
+                <CalendarIcon class="blog-date-icon" />
+                {{ formatDate(post.date) }}
+              </span>
               <span class="blog-category">{{ post.category }}</span>
             </div>
           </div>
@@ -35,9 +38,13 @@
 </template>
 
 <script>
+import { CalendarIcon } from '@heroicons/vue/24/outline'
 import { i18n, t as $t } from '../utils/i18n'
 export default {
   name: 'Blog',
+  components: {
+    CalendarIcon
+  },
   data() {
     return {
       posts: [],
@@ -154,6 +161,20 @@ export default {
   gap: 1rem;
   font-size: 0.9rem;
   color: var(--color-muted);
+  align-items: center;
+}
+
+.blog-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.blog-date-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-muted);
+  flex-shrink: 0;
 }
 
 .blog-category {
