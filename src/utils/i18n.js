@@ -335,7 +335,7 @@ const dict = {
       loading: 'Loading...',
       github: 'GitHub Repos',
       details: 'Details',
-      demo: 'Learn More',
+      demo: 'Try',
       visit: 'Visit repo →',
       portfolioDesc: 'Personal Portfolio Website',
       loadError: 'Failed to load project data'
