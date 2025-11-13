@@ -52,7 +52,7 @@ export default {
     },
     linksList() {
       const links = getDict('links.linksList') || []
-      const iconMap = ['CodeBracketIcon', 'BookOpenIcon', 'CodeBracketIcon', 'QuestionMarkCircleIcon', 'RocketLaunchIcon', 'PaintBrushIcon']
+      const iconMap = ['CodeBracketIcon', 'BookOpenIcon', 'CodeBracketIcon', 'QuestionMarkCircleIcon', 'RocketLaunchIcon', 'PaintBrushIcon', 'LinkIcon','LinkIcon','LinkIcon']
       const urlMap = {
         zh: [
           'https://github.com/Yungu-HZ-Highschool/',
@@ -60,7 +60,10 @@ export default {
           'https://github.com/',
           'https://stackoverflow.com/',
           'https://cn.vitejs.dev/',
-          'https://css-tricks.com/'
+          'https://css-tricks.com/',
+          'https://wraje.github.io/',
+          'https://mathewmsj.github.io/',
+          'https://dengruihan.github.io/'
         ],
         en: [
           'https://github.com/Yungu-HZ-Highschool',
@@ -68,7 +71,10 @@ export default {
           'https://github.com/',
           'https://stackoverflow.com/',
           'https://vitejs.dev/',
-          'https://css-tricks.com/'
+          'https://css-tricks.com/',
+          'https://wraje.github.io/',
+          'https://mathewmsj.github.io/',
+          'https://dengruihan.github.io/'
         ]
       }
       return links.map((link, index) => ({

@@ -19,12 +19,14 @@
           <li><router-link to="/blog" @click="closeMenu">{{ t('nav.blog') }}</router-link></li>
           <li><router-link to="/links" @click="closeMenu">{{ t('nav.links') }}</router-link></li>
           <li><router-link to="/contact" @click="closeMenu">{{ t('nav.contact') }}</router-link></li>
+          <li class="lang-toggle-wrapper">
+            <button class="lang-toggle" @click="toggleLanguage">
+              <span :class="{ active: language === 'zh' }">中文</span>
+              <span class="divider">|</span>
+              <span :class="{ active: language === 'en' }">EN</span>
+            </button>
+          </li>
         </ul>
-        <button class="lang-toggle" @click="toggleLanguage">
-          <span :class="{ active: language === 'zh' }">中文</span>
-          <span class="divider">|</span>
-          <span :class="{ active: language === 'en' }">EN</span>
-        </button>
       </div>
     </div>
   </nav>
@@ -164,6 +166,14 @@ export default {
   transition: all 0.3s;
 }
 
+.lang-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--border);
+}
+
 .lang-toggle {
   display: inline-flex;
   align-items: center;
@@ -177,7 +187,6 @@ export default {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
-  align-self: center;
 }
 
 .lang-toggle:hover {
@@ -219,10 +228,14 @@ export default {
     visibility: visible;
   }
 
-  .lang-toggle {
+  .lang-toggle-wrapper {
     margin-left: 0;
-    margin-top: 1rem;
-    align-self: center;
+    margin-top: 0.5rem;
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    justify-content: center;
   }
 }
 </style>

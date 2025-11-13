@@ -14,7 +14,7 @@
       <div v-else class="projects-grid">
         <div v-for="project in projects" :key="project.id" class="project-card">
           <div class="project-image">
-            <img :src="resolveAssetUrl(project.image) || '/placeholder.jpg'" :alt="project.name" @error="handleImageError" />
+            <img :src="resolveAssetUrl(project.image) || '/photos/placeholder.jpg'" :alt="project.name" @error="handleImageError" />
           </div>
           <div class="project-content">
             <h2>{{ project.name }}</h2>
@@ -23,7 +23,20 @@
             </div>
             <div class="project-actions">
               <router-link :to="`/projects/${project.id}`" class="btn btn-primary">{{ t('projects.details') }}</router-link>
-              <a v-if="project.github" :href="project.github" target="_blank" class="btn btn-secondary">GitHub</a>
+              <a v-if="project.demo" :href="project.demo" target="_blank" rel="noopener noreferrer" class="btn btn-demo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.3rem;">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                {{ t('projects.demo') || '了解' }}
+              </a>
+              <a v-if="project.github" :href="project.github" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.3rem;">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                GitHub
+              </a>
             </div>
           </div>
         </div>
@@ -202,7 +215,8 @@ export default {
 
 .project-actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
+  flex-wrap: nowrap;
 }
 
 .btn {
@@ -213,7 +227,12 @@ export default {
   border: none;
   cursor: pointer;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  flex: 0 1 auto;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -233,6 +252,17 @@ export default {
 }
 
 .btn-secondary:hover {
+  background: rgba(38,58,82,0.12);
+  transform: translateY(-2px);
+}
+
+.btn-demo {
+  background: rgba(38,58,82,0.06);
+  color: var(--brand);
+  border: 1px solid var(--border);
+}
+
+.btn-demo:hover {
   background: rgba(38,58,82,0.12);
   transform: translateY(-2px);
 }
@@ -303,6 +333,15 @@ export default {
 
   .page-title {
     font-size: 2rem;
+  }
+
+  .project-actions {
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 }
 </style>

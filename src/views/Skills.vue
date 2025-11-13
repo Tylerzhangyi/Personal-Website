@@ -5,70 +5,119 @@
       
       <div class="skills-section">
         <h2>{{ t('skills.skillset') }}</h2>
-        <div class="skills-grid">
-          <div v-for="skill in skillsList" :key="skill.name" class="skill-item">
-            <div class="skill-header">
-              <span class="skill-name">{{ skill.name }}</span>
-              <span class="skill-level">{{ skill.level }}%</span>
-            </div>
-            <div class="skill-bar">
-              <div class="skill-progress" :style="{ width: skill.level + '%' }"></div>
-            </div>
+        <div class="skills-container">
+          <div class="radar-chart-wrapper">
+            <svg class="radar-chart" :class="{ 'chart-loaded': chartLoaded }" :viewBox="`0 0 ${chartSize} ${chartSize}`">
+              <defs>
+                <!-- 渐变定义 -->
+                <linearGradient id="skillGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" :style="{ stopColor: '#ff2d75', stopOpacity: 0.4 }" />
+                  <stop offset="50%" :style="{ stopColor: '#ff6b9d', stopOpacity: 0.3 }" />
+                  <stop offset="100%" :style="{ stopColor: '#ff2d75', stopOpacity: 0.4 }" />
+                </linearGradient>
+                <radialGradient id="pointGradient" cx="50%" cy="50%">
+                  <stop offset="0%" :style="{ stopColor: '#ff2d75', stopOpacity: 1 }" />
+                  <stop offset="100%" :style="{ stopColor: '#ff6b9d', stopOpacity: 0.8 }" />
+                </radialGradient>
+                <!-- 从中心展开的clipPath - 使用径向渐变 -->
+                <clipPath id="skillClip">
+                  <circle :cx="centerX" :cy="centerY" r="0" class="clip-circle">
+                    <animate attributeName="r" from="0" :to="radius * 1.8" dur="1.5s" begin="0.3s" fill="freeze" />
+                  </circle>
+                </clipPath>
+              </defs>
+              
+              <!-- 背景网格 -->
+              <g class="grid-lines">
+                <polygon
+                  v-for="(level, index) in gridLevels"
+                  :key="'grid-' + index"
+                  :points="getGridPolygonPoints(level)"
+                  :class="'grid-level-' + index"
+                />
+              </g>
+              
+              <!-- 从中心到顶点的连接线 -->
+              <line
+                v-for="(line, index) in centerLines"
+                :key="'line-' + index"
+                :x1="line.x1"
+                :y1="line.y1"
+                :x2="line.x2"
+                :y2="line.y2"
+                class="center-line"
+                :class="'line-' + index"
+              />
+              
+              <!-- 技能区域 -->
+              <polygon
+                :points="getSkillPolygonPoints()"
+                class="skill-area"
+                fill="url(#skillGradient)"
+                clip-path="url(#skillClip)"
+              />
+              
+              <!-- 技能点 -->
+              <circle
+                v-for="(point, index) in skillPoints"
+                :key="'point-' + index"
+                :cx="point.x"
+                :cy="point.y"
+                r="5"
+                class="skill-point"
+                :class="'point-' + index"
+                fill="url(#pointGradient)"
+              />
+              
+              <!-- 技能标签 -->
+              <text
+                v-for="(label, index) in skillLabels"
+                :key="'label-' + index"
+                :x="label.x"
+                :y="label.y"
+                class="skill-label"
+                :text-anchor="label.anchor"
+                :dominant-baseline="label.baseline"
+              >
+                {{ label.text }}
+              </text>
+              
+              <!-- 技能值标签 -->
+              <text
+                v-for="(value, index) in skillValueLabels"
+                :key="'value-' + index"
+                :x="value.x"
+                :y="value.y"
+                class="skill-value"
+                :text-anchor="value.anchor"
+                :dominant-baseline="value.baseline"
+              >
+                {{ value.text }}%
+              </text>
+            </svg>
           </div>
         </div>
-      </div>
-
-      <div class="resume-section">
-        <h2>{{ t('skills.education') }}</h2>
-        <div class="timeline">
-          <div v-for="(edu, index) in educationList" :key="index" class="timeline-item">
-            <div class="timeline-content">
-              <h3>{{ edu.degree }}</h3>
-              <p class="institution">{{ edu.institution }}</p>
-              <p class="period">{{ edu.period }}</p>
-              <p class="description">
-                <template v-if="edu.link">
-                  <a :href="edu.link" target="_blank" rel="noopener">{{ edu.description }}</a>
-                </template>
-                <template v-else>
-                  {{ edu.description }}
-                </template>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="courses-section">
-        <h2>{{ t('skills.courses') }}</h2>
-        <div class="courses-grid">
-          <div v-for="course in coursesList" :key="course" class="course-tag">
-            {{ course }}
-          </div>
-        </div>
-      </div>
-
-      <div class="awards-section">
-        <h2>{{ t('skills.awards') }}</h2>
-        <ul class="awards-list">
-          <li v-for="award in awardsList" :key="award">
-            <TrophyIcon class="award-icon" />
-            {{ award }}
-          </li>
-        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { TrophyIcon } from '@heroicons/vue/24/outline'
 import { i18n, t as $t, getDict } from '../utils/i18n'
 
 export default {
   name: 'Skills',
-  components: {
-    TrophyIcon
+  data() {
+    return {
+      chartSize: 550,
+      centerX: 275,
+      centerY: 275,
+      radius: 150,
+      gridLevels: [0.2, 0.4, 0.6, 0.8, 1.0],
+      skillAreaColor: 'rgba(255, 45, 117, 0.25)',
+      labelOffset: 60,
+      chartLoaded: false
+    }
   },
   computed: {
     currentLang() {
@@ -77,19 +126,131 @@ export default {
     skillsList() {
       return getDict('skills.skillsList') || []
     },
-    educationList() {
-      return getDict('skills.educationList') || []
+    skillCount() {
+      return Math.max(this.skillsList.length, 1)
     },
-    coursesList() {
-      return getDict('skills.coursesList') || []
+    angleStep() {
+      return (2 * Math.PI) / this.skillCount
     },
-    awardsList() {
-      return getDict('skills.awardsList') || []
+    skillPoints() {
+      return this.skillsList.map((skill, index) => {
+        const angle = (index * this.angleStep) - (Math.PI / 2)
+        const level = skill.level / 100
+        const r = this.radius * level
+        return {
+          x: this.centerX + r * Math.cos(angle),
+          y: this.centerY + r * Math.sin(angle),
+          angle
+        }
+      })
+    },
+    centerLines() {
+      return this.skillPoints.map((point, index) => ({
+        x1: this.centerX,
+        y1: this.centerY,
+        x2: point.x,
+        y2: point.y,
+        index
+      }))
+    },
+    skillLabels() {
+      return this.skillsList.map((skill, index) => {
+        const angle = (index * this.angleStep) - (Math.PI / 2)
+        const labelRadius = this.radius + this.labelOffset
+        let x = this.centerX + labelRadius * Math.cos(angle)
+        let y = this.centerY + labelRadius * Math.sin(angle)
+        
+        // 确定文本对齐方式
+        let anchor = 'middle'
+        let baseline = 'middle'
+        
+        // 根据角度调整位置，避免被遮挡
+        if (Math.abs(Math.cos(angle)) < 0.1) {
+          // 垂直方向
+          anchor = 'middle'
+          if (Math.sin(angle) > 0) {
+            baseline = 'hanging'
+            y += 5 // 向下偏移一点
+          } else {
+            baseline = 'auto'
+            y -= 5 // 向上偏移一点
+          }
+        } else if (Math.cos(angle) > 0) {
+          // 右侧
+          anchor = 'start'
+          x += 25 // 向右偏移更多，避免被遮挡（特别是JavaScript）
+          baseline = 'middle'
+        } else {
+          // 左侧
+          anchor = 'end'
+          x -= 25 // 向左偏移更多
+          baseline = 'middle'
+        }
+        
+        return {
+          x,
+          y,
+          text: skill.name,
+          anchor,
+          baseline
+        }
+      })
+    },
+    skillValueLabels() {
+      return this.skillsList.map((skill, index) => {
+        const angle = (index * this.angleStep) - (Math.PI / 2)
+        const level = skill.level / 100
+        const r = this.radius * level
+        const valueRadius = r - 15
+        const x = this.centerX + valueRadius * Math.cos(angle)
+        const y = this.centerY + valueRadius * Math.sin(angle)
+        
+        let anchor = 'middle'
+        let baseline = 'middle'
+        
+        if (Math.abs(Math.cos(angle)) < 0.1) {
+          anchor = 'middle'
+        } else if (Math.cos(angle) > 0) {
+          anchor = 'start'
+        } else {
+          anchor = 'end'
+        }
+        
+        return {
+          x,
+          y,
+          text: skill.level,
+          anchor,
+          baseline
+        }
+      })
     }
+  },
+  mounted() {
+    // 触发加载动画
+    this.$nextTick(() => {
+      setTimeout(() => {
+        this.chartLoaded = true
+      }, 100)
+    })
   },
   methods: {
     t(key) {
       return $t(key)
+    },
+    getGridPolygonPoints(level) {
+      const points = []
+      for (let i = 0; i < this.skillCount; i++) {
+        const angle = (i * this.angleStep) - (Math.PI / 2)
+        const r = this.radius * level
+        const x = this.centerX + r * Math.cos(angle)
+        const y = this.centerY + r * Math.sin(angle)
+        points.push(`${x},${y}`)
+      }
+      return points.join(' ')
+    },
+    getSkillPolygonPoints() {
+      return this.skillPoints.map(p => `${p.x},${p.y}`).join(' ')
     }
   }
 }
@@ -105,10 +266,7 @@ export default {
   letter-spacing: -0.02em;
 }
 
-.skills-section,
-.resume-section,
-.courses-section,
-.awards-section {
+.skills-section {
   background: var(--color-surface);
   padding: 2.5rem;
   margin-bottom: 2rem;
@@ -125,46 +283,125 @@ h2 {
   letter-spacing: -0.01em;
 }
 
-.skills-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.skill-item {
-  width: 100%;
-}
-
-.skill-header {
+.skills-container {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.skill-name {
+.radar-chart-wrapper {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.radar-chart {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+}
+
+.grid-lines polygon {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.radar-chart.chart-loaded .grid-lines polygon {
+  opacity: 1;
+}
+
+.grid-lines polygon.grid-level-4 {
+  stroke-width: 2;
+  stroke: rgba(255, 255, 255, 0.6);
+}
+
+.center-line {
+  stroke: rgba(255, 255, 255, 0.2);
+  stroke-width: 1;
+  opacity: 0;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: opacity 0.6s ease, stroke-dashoffset 0.8s ease;
+}
+
+.radar-chart.chart-loaded .center-line {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+.radar-chart.chart-loaded .center-line.line-0 { transition-delay: 0.2s; }
+.radar-chart.chart-loaded .center-line.line-1 { transition-delay: 0.3s; }
+.radar-chart.chart-loaded .center-line.line-2 { transition-delay: 0.4s; }
+.radar-chart.chart-loaded .center-line.line-3 { transition-delay: 0.5s; }
+.radar-chart.chart-loaded .center-line.line-4 { transition-delay: 0.6s; }
+
+.clip-circle {
+  fill: white;
+}
+
+.skill-area {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  opacity: 0;
+  transition: opacity 1s ease 0.4s;
+}
+
+.radar-chart.chart-loaded .skill-area {
+  opacity: 0.9;
+}
+
+.skill-point {
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.radar-chart.chart-loaded .skill-point {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.radar-chart.chart-loaded .skill-point.point-0 { transition-delay: 0.5s; }
+.radar-chart.chart-loaded .skill-point.point-1 { transition-delay: 0.6s; }
+.radar-chart.chart-loaded .skill-point.point-2 { transition-delay: 0.7s; }
+.radar-chart.chart-loaded .skill-point.point-3 { transition-delay: 0.8s; }
+.radar-chart.chart-loaded .skill-point.point-4 { transition-delay: 0.9s; }
+
+.skill-label {
+  font-size: 14px;
   font-weight: 600;
-  color: var(--color-text);
-  font-size: 0.95rem;
+  fill: var(--color-text);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  transition-delay: 0.8s;
 }
 
-.skill-level {
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.9rem;
+.radar-chart.chart-loaded .skill-label {
+  opacity: 1;
 }
 
-.skill-bar {
-  height: 8px;
-  background: rgba(0,0,0,0.06);
-  border-radius: 4px;
-  overflow: hidden;
+.skill-value {
+  font-size: 12px;
+  font-weight: 700;
+  fill: var(--accent);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  transition-delay: 1s;
 }
 
-.skill-progress {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-600));
-  border-radius: 4px;
-  transition: width 0.6s ease;
+.radar-chart.chart-loaded .skill-value {
+  opacity: 1;
 }
+
+
 
 .timeline {
   position: relative;
@@ -307,11 +544,12 @@ h2 {
     font-size: 2rem;
   }
 
-  .skills-section,
-  .resume-section,
-  .courses-section,
-  .awards-section {
+  .skills-section {
     padding: 1.5rem;
+  }
+
+  .radar-chart-wrapper {
+    padding: 1rem;
   }
 
   .timeline-item {

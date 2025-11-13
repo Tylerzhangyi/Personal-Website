@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="hero-photo">
-            <img src="/tyler.png" :alt="t('home.avatarAlt')" @error="handleImageError" />
+            <img src="/photos/tyler.png" :alt="t('home.avatarAlt')" @error="handleImageError" />
           </div>
         </div>
       </div>

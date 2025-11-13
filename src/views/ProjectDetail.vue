@@ -17,7 +17,7 @@
         
         <div class="project-header">
           <div class="project-image-large">
-            <img :src="resolveAssetUrl(project.image) || '/placeholder.jpg'" :alt="project.name" @error="handleImageError" />
+            <img :src="resolveAssetUrl(project.image) || '/photos/placeholder.jpg'" :alt="project.name" @error="handleImageError" />
           </div>
         </div>
 

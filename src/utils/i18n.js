@@ -52,15 +52,16 @@ const dict = {
       interests: '学术兴趣',
       interestsList: [
         '人机交互',
-        'Java, Python',
         '机器学习',
-        'Web前端开发',
-        '数据库管理(AWS, MySQL)'
+        'Web前端开发'
       ],
       hobbies: '个人爱好',
       hobbiesText: '素描,油画,电子游戏,棒球',
       goals: '目标与抱负',
-      goalsText: '我的目标是成为一名应用开发者，能够独立完成从设计到部署的整个项目流程。我希望能够参与到有意义的项目中，通过自己的计算机知识帮助到更多的人。'
+      goalsText: '我的目标是成为一名应用开发者，能够独立完成从设计到部署的整个项目流程。我希望能够参与到有意义的项目中，通过自己的计算机知识帮助到更多的人。',
+      education: '学习经历',
+      courses: '精选课程',
+      awards: '奖项与荣誉'
     },
     skills: {
       title: '技能与简历',
@@ -70,7 +71,7 @@ const dict = {
       awards: '奖项与成就',
       skillsList: [
         { name: 'Vue.js', level: 85 },
-        { name: 'JavaScript', level: 80 },
+        { name: 'JS', level: 80 },
         { name: 'HTML/CSS', level: 90 },
         { name: 'Python', level: 75 },
         { name: 'Git', level: 70 }
@@ -108,7 +109,9 @@ const dict = {
         'CL/AP Computer Science A',
         'CL Applied Python Programming, Information and Communication Technology',
         'CL/AP Physics C:Electricity and Magnetism',
-        'CL/AP Physics C: Mechanics'
+        'CL/AP Physics C: Mechanics',
+        'Linear Algebra',
+        'CL/AP Calculus BC'
       ],
       awardsList: [
         "2024, 2025 Dean's List, Overall Academic Performance Top 3%",
@@ -123,6 +126,7 @@ const dict = {
       loading: '加载中...',
       github: 'GitHub 仓库',
       details: '查看详情',
+      demo: '了解',
       visit: '访问仓库 →',
       portfolioDesc: '个人作品集网站',
       loadError: '无法加载项目数据'
@@ -183,6 +187,18 @@ const dict = {
         {
           title: 'CSS-Tricks',
           description: '前端开发技巧和教程的优质网站'
+        },
+        {
+          title: '王越舟的个人网站',
+          description: '我的朋友王越舟的个人主页，展示了他在技术与创意方面的作品'
+        },
+        {
+          title: '马思嘉的个人网站',
+          description: '我的朋友马思嘉的个人主页，展示了他在技术与创意方面的作品'
+        },
+        {
+          title: '邓睿涵的个人网站',
+          description: '我的朋友邓睿涵的个人主页，展示了他在技术与创意方面的作品'
         }
       ]
     },
@@ -193,7 +209,7 @@ const dict = {
       github: 'GitHub',
       location: '所在地',
       phone: '手机号',
-      gameAccount: '王者荣耀',
+      gameAccount: 'QQ',
       sendMail: '发邮件给我',
       viewProjects: '查看项目',
       cooperation: '合作意向',
@@ -245,15 +261,16 @@ const dict = {
       interests: 'Academic Interests',
       interestsList: [
         'Human-Computer Interaction',
-        'Java, Python',
         'Machine Learning',
         'Web Front-end Development',
-        'Database Management (AWS, MySQL)'
       ],
       hobbies: 'Hobbies',
       hobbiesText: 'Sketching, Oil painting, Video games, Baseball,',
       goals: 'Goals & Aspirations',
-      goalsText: 'My goal is to become an application developer, capable of independently completing the entire project process from design to deployment. I hope to be involved in meaningful projects and help more people with my computer knowledge.'
+      goalsText: 'My goal is to become an application developer, capable of independently completing the entire project process from design to deployment. I hope to be involved in meaningful projects and help more people with my computer knowledge.',
+      education: 'Education & Experience',
+      courses: 'Featured Courses',
+      awards: 'Honors & Awards'
     },
     skills: {
       title: 'Skills & Resume',
@@ -263,7 +280,7 @@ const dict = {
       awards: 'Awards & Achievements',
       skillsList: [
         { name: 'Vue.js', level: 85 },
-        { name: 'JavaScript', level: 80 },
+        { name: 'JS', level: 80 },
         { name: 'HTML/CSS', level: 90 },
         { name: 'Python', level: 75 },
         { name: 'Git', level: 70 }
@@ -300,8 +317,10 @@ const dict = {
       coursesList: [
         'CL/AP Computer Science A',
         'CL Applied Python Programming, Information and Communication Technology',
-        'CL/AP Physics C: Electricity and Magnetism',
-        'CL/AP Physics C: Mechanics'
+        'CL/AP Physics C:Electricity and Magnetism',
+        'CL/AP Physics C: Mechanics',
+        'Linear Algebra',
+        'CL/AP Calculus BC'
       ],
       awardsList: [
         "2024, 2025 Dean's List, Overall Academic Performance Top 3%",
@@ -316,6 +335,7 @@ const dict = {
       loading: 'Loading...',
       github: 'GitHub Repos',
       details: 'Details',
+      demo: 'Learn More',
       visit: 'Visit repo →',
       portfolioDesc: 'Personal Portfolio Website',
       loadError: 'Failed to load project data'
@@ -375,7 +395,19 @@ const dict = {
         },
         {
           title: 'CSS-Tricks',
-          description: 'Quality website for front-end development tips and tutorials'
+          description: 'Fantastic tips to help you become a professional in CSS'
+        },
+        {
+          title: "Robin's Personal Website",
+          description: "My friend Robin's personal homepage showcasing his work across technology and creativity"
+        },
+        {
+          title: "Matthew's Personal Website",
+          description: "My friend Matthew's personal homepage showcasing his work across technology and creativity"
+        },
+        {
+          title: "Raymond's Personal Website",
+          description: "My friend Raymond's personal homepage showcasing his work across technology and creativity"
         }
       ]
     },
@@ -386,7 +418,7 @@ const dict = {
       github: 'GitHub',
       location: 'Location',
       phone: 'Phone',
-      gameAccount: 'Honor of Kings',
+      gameAccount: 'QQ',
       sendMail: 'Email me',
       viewProjects: 'View Projects',
       cooperation: 'Cooperation',

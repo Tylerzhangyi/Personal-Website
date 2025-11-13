@@ -153,3 +153,6 @@ Assessment Method: During the final presentation, I (the teacher) will randomly 
 
 21.根据要求修改主页
 
+22.帮我把所有的图片放到public下面的一个叫photos的文件夹里面,同时修改这个项目里的所有路径让他匹配修改
+
+23.帮我把切换中英文的按钮并入navigation bar里面
