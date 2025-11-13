@@ -156,3 +156,19 @@ Assessment Method: During the final presentation, I (the teacher) will randomly 
 22.帮我把所有的图片放到public下面的一个叫photos的文件夹里面,同时修改这个项目里的所有路径让他匹配修改
 
 23.帮我把切换中英文的按钮并入navigation bar里面
+
+24.技能集合的这个能做成一个维度图吗?类似六维图能力图的那种
+
+25.雷达图的背景线改成白色或者其他显眼的颜色.调整雷达图和边上说明的比例.java的a被挡住了一部分
+
+26.关于我版块中,玫红色点以及百分比的标注动画是直接出现就可以雷达图中
+
+27.完成翻的英文版.同时——记一位热衷公益的程序员蜕变成老师的故事是副标题,每一段开头要有缩进
+
+28.https://www.olympics.com/ioc/news/alibaba-celebrates-olympic-day-with-global-activities-promoting-fitness-inclusion-and-innovation 用这个替换第二篇博客
+
+29.演示的按钮风格也要和主题统一.同时不要叫演示,叫了解.我希望如果存在三个按钮能让他们在一行出现
+
+30.把技把技能页面中和学习经历，奖项之类有关的全部放到关于我的页面中能页面中和学习经历，奖项之类有关的全部放到关于我的页面中
+
+31.学习经历和精选课程，荣誉都是单独一行。同时我想用photos文件夹里面的circuit.svg作为favison
