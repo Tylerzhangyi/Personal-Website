@@ -52,10 +52,10 @@ export default {
     },
     linksList() {
       const links = getDict('links.linksList') || []
-      const iconMap = ['BoltIcon', 'BookOpenIcon', 'CodeBracketIcon', 'QuestionMarkCircleIcon', 'RocketLaunchIcon', 'PaintBrushIcon']
+      const iconMap = ['CodeBracketIcon', 'BookOpenIcon', 'CodeBracketIcon', 'QuestionMarkCircleIcon', 'RocketLaunchIcon', 'PaintBrushIcon']
       const urlMap = {
         zh: [
-          'https://cn.vuejs.org/',
+          'https://github.com/Yungu-HZ-Highschool/',
           'https://eric.mojalab.cn/',
           'https://github.com/',
           'https://stackoverflow.com/',
@@ -63,7 +63,7 @@ export default {
           'https://css-tricks.com/'
         ],
         en: [
-          'https://vuejs.org/',
+          'https://github.com/Yungu-HZ-Highschool',
           'https://eric.mojalab.cn/',
           'https://github.com/',
           'https://stackoverflow.com/',

@@ -161,8 +161,8 @@ const dict = {
       visit: '访问链接 →',
       linksList: [
         {
-          title: 'Vue.js 官方文档',
-          description: 'Vue.js 的官方文档，学习 Vue 的最佳资源'
+          title: 'Yungu\'s GitHub',
+          description: 'Yungu 的 GitHub 仓库, 包含 Yungu计算机的课程作业和项目'
         },
         {
           title: '木酱的个人网站',
@@ -354,8 +354,8 @@ const dict = {
       visit: 'Visit →',
       linksList: [
         {
-          title: 'Vue.js Official Documentation',
-          description: 'Official Vue.js documentation, the best resource for learning Vue'
+          title: 'Yungu\'s GitHub',
+          description: 'Yungu\'s GitHub repository, containing Yungu Computer\'s course assignments and projects'
         },
         {
           title: "Eric Dai's Personal Website",

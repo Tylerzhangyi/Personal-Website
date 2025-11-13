@@ -147,3 +147,9 @@ Assessment Method: During the final presentation, I (the teacher) will randomly 
 
 18.copyright居中吗,删除链接
 
+19.调整照片和文字之间的比例和距离
+
+20.去除人物图片的黑色背景.让原本透明的部分保持透明
+
+21.根据要求修改主页
+
