@@ -33,9 +33,9 @@
           </div>
         </div>
 
-        <div v-if="project.contribution" class="project-contribution-section">
-          <h2>{{ t('projectDetail.contribution') }}</h2>
-          <p>{{ project.contribution }}</p>
+        <div v-if="project.description" class="project-contribution-section">
+          <h2>{{ t('projectDetail.description') }}</h2>
+          <p class="project-description-text">{{ project.description }}</p>
         </div>
 
         <div class="project-links-section">
@@ -195,11 +195,17 @@ h2 {
   letter-spacing: -0.01em;
 }
 
-.project-intro-section p,
-.project-contribution-section p {
+.project-intro-section p {
   color: var(--color-muted);
   line-height: 1.8;
   font-size: 1.05rem;
+}
+
+.project-description-text {
+  color: var(--color-muted);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  white-space: pre-wrap;
 }
 
 .tech-list {
